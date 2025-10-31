@@ -1,0 +1,5 @@
+# Carpeta de nodejs
+node_modules/
+
+# Llave para Gemini
+.env
