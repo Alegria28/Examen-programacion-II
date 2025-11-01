@@ -43,7 +43,7 @@ form.addEventListener("submit", async (e) => {
 
             // Redirigimos al usuario a la pagina principal
             window.location.replace("/");
-            
+
         } else {
             alert(data?.error ?? `Error ${res.status}`);
             document.getElementById("login").value = "";

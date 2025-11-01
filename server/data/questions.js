@@ -21,7 +21,7 @@ module.exports = [
   {
     id: 4,
     text: "¿Cómo se especifica las clases que tienen una súper clase?",
-    options: ["Interface","implements", "Extends", "Object"],
+    options: ["Interface", "implements", "Extends", "Object"],
     correct: "Extends"
   },
   {
@@ -33,18 +33,18 @@ module.exports = [
   {
     id: 6,
     text: "Menciona los tres modificadores de acceso",
-    options: ["Static, final, private","Clase, static, public", "Public, private, protected", "Class, final, static"],
+    options: ["Static, final, private", "Clase, static, public", "Public, private, protected", "Class, final, static"],
     correct: "Public, private, protected"
   },
   {
     id: 7,
     text: "¿Cuál de estas son palabras reservadas de java?",
-    options: ["cast future generic","continue for Boolean","default goto null","Implements Public Extends"],
+    options: ["cast future generic", "continue for Boolean", "default goto null", "Implements Public Extends"],
     correct: "cast future generic"
   },
   {
     id: 8,
-    text:"¿Cuáles son las variables de objeto en Java?",
+    text: "¿Cuáles son las variables de objeto en Java?",
     options: ["Es un conjunto de declaraciones de funciones", "Encapsulamiento y herencia", "Es una agrupación de datos y de funciones", "Implements Public Extends"],
     correct: "Encapsulamiento y herencia"
   },
@@ -63,19 +63,19 @@ module.exports = [
   {
     id: 12,
     text: "¿Cómo se debe llamar el fichero con extensión .java?",
-    options: [ "El fichero se debe llamar como atributo", "El fichero se debe llamar como la clase interface", "El fichero se debe llamar como la clase object", "El fichero de debe llamar como la clase public"],
+    options: ["El fichero se debe llamar como atributo", "El fichero se debe llamar como la clase interface", "El fichero se debe llamar como la clase object", "El fichero de debe llamar como la clase public"],
     correct: "El fichero de debe llamar como la clase public"
   },
   {
     id: 11,
     text: "¿Qué palabra reservada se utiliza para heredar una clase?",
     options: ["implements", "extends", "inherit", "super"],
-    correct: "extends"  
+    correct: "extends"
   },
   {
     id: 13,
     text: "¿Qué palabra reservada se utiliza para implementar una interface?",
-    options: ["extends", "implements", "inherit", "super"], 
+    options: ["extends", "implements", "inherit", "super"],
     correct: "implements"
   },
   {

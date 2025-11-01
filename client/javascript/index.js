@@ -8,7 +8,7 @@ let preguntas = [];
 btnCargar.addEventListener("click", async () => {
     // Verificar si hay token de autenticación
     const token = localStorage.getItem('authToken'); // o sessionStorage
-    
+
     if (!token) {
         alert("Debes iniciar sesión primero para realizar el quiz");
         // Redirigir al login
@@ -17,9 +17,9 @@ btnCargar.addEventListener("click", async () => {
     }
 
     console.log("Enviando petición a /api/questions/start");
-    
+
     try {
-        const res = await fetch(`${API}/start`, { 
+        const res = await fetch(`${API}/start`, {
             method: "POST",
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -42,7 +42,7 @@ btnCargar.addEventListener("click", async () => {
         const data = await res.json();
         console.log("Respuesta del servidor:", data);
         preguntas = data.questions;
-        
+
         listaPreguntas.innerHTML = "";
         preguntas.forEach(q => {
             const div = document.createElement("div");
@@ -57,11 +57,11 @@ btnCargar.addEventListener("click", async () => {
             `;
             listaPreguntas.appendChild(div);
         });
-        
+
         quizForm.style.display = "block";
         resultado.innerHTML = "";
         btnCargar.style.display = "none";
-        
+
     } catch (error) {
         console.error("Error al cargar preguntas:", error);
         alert("Error al cargar las preguntas: " + error.message);
@@ -77,7 +77,7 @@ quizForm.addEventListener("submit", async e => {
 
     console.log("Enviando petición a /api/questions/submit");
     console.log("Enviando respuestas:", { answers });
-    
+
     const res = await fetch(`${API}/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -135,29 +135,29 @@ function updateUILoggedOut() {
 
 // --- Función para hacer logout ---
 async function logout() {
-  try {
-    const res = await fetch("http://localhost:3000/api/logout", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    
-    if (res.ok) {
-      alert('Sesión cerrada correctamente');
-    } else {
-      const data = await res.json();
-      alert(data?.error ?? `Error al cerrar sesión`);
+    try {
+        const res = await fetch("http://localhost:3000/api/logout", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+        if (res.ok) {
+            alert('Sesión cerrada correctamente');
+        } else {
+            const data = await res.json();
+            alert(data?.error ?? `Error al cerrar sesión`);
+        }
+    } catch (err) {
+        console.error("Error al conectar con el servidor:", err);
+        alert("Error de conexión");
+    } finally {
+        // Siempre limpiar localStorage y actualizar UI, incluso si hay error
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        updateUILoggedOut();
     }
-  } catch (err) {
-    console.error("Error al conectar con el servidor:", err);
-    alert("Error de conexión");
-  } finally {
-    // Siempre limpiar localStorage y actualizar UI, incluso si hay error
-    localStorage.removeItem('token');
-    localStorage.removeItem('userName');
-    updateUILoggedOut();
-  }
 }
 
 checkSession();
