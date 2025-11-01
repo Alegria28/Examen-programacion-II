@@ -1,14 +1,8 @@
 [
-    {
-        "cuenta": "alegria",
-        "contrasena": "alegriaProgra"
-    },
-    {
-        "cuenta": "oscar",
-        "contrasena": "oscarProgra"
-    },
-    {
-        "cuenta": "darely",
-        "contrasena": "darelyProgra"
-    }
+  { "cuenta": "alegria", "contrasena": "alegriaProgra" },
+  { "cuenta": "darely", "contrasena": "darelyProgra" },
+  { "cuenta": "oscar", "contrasena": "oscarProgra" },
+  { "cuenta": "luis", "contrasena": "progra1" },
+  { "cuenta": "andrea", "contrasena": "progra2" },
+  { "cuenta": "prof_uaa", "contrasena": "progra3" }
 ]

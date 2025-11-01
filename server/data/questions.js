@@ -57,7 +57,7 @@ module.exports = [
   {
     id: 10,
     text: "¿Cómo se llama la clase que termina una cadena de herencia?",
-    oprions: ["Public", "Abstract", "Public", "final"],
+    options: ["Public", "Abstract", "Public", "final"],
     correct: "final"
   },
   {
