@@ -4,28 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificaciones para desarrolladores</title>
-
+    <title>Certificaciones | Lexiscode</title>
+    <link rel="icon" href="../img/Favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/certifications.css">
 </head>
 
 <body>
     <header>
         <nav>
-            <a href="../../index.html" class="logo">certificates.dev</a>
+            <a href="../../index.html" class="logo">
+                <img src="../img/Favicon.ico" alt="Lexiscode logo">
+            </a>
             <ul>
-                <li><a href="#">Certificaciones</a></li>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="./certifications.html">Certificaciones</a></li>
                 <li><a href="#">Contacto</a></li>
-                <li><a href="#">Nosotros</a></li>
-                <li><a href="./client/html/login.html">Login</a></li>
+                <li><a href="./about.html">Nosotros</a></li>
+                <li>
+                    <div id="cuenta">
+                        <!-- Esto se llenara dinámicamente dependiendo si hay una sesion iniciada o no-->
+                    </div>
+                </li>
             </ul>
         </nav>
     </header>
     <main>
         <section class="hero">
-            <h1><a href="java.html">Certificacion de Java (prueba)</h1>
+            <h1>Certificaciones Disponibles</h1>
+            <div class="certifications-list">
+                <div class="cert-card">
+                    <h2>Certificación de Java</h2>
+                    <p>Demuestra tu conocimiento en Java con nuestra certificación profesional.</p>
+                    <a href="java.html" class="btn-cert">Iniciar Prueba</a>
+                </div>
+            </div>
         </section>
     </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Lexiscode. Todos los derechos reservados.</p>
+            <ul class="social-media">
+                <li><a href="#">Instagram</a></li>
+            </ul>
+        </div>
+    </footer>
 
     <script src="../javascript/certifications.js"></script>
 </body>

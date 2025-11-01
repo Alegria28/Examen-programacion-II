@@ -11,7 +11,7 @@ function checkSession() {
 // --- Actualizar UI cuando hay sesión ---
 function updateUILoggedIn(userName) {
     // Obtenemos el div
-    const contenidoDiv = document.getElementById("cuenta")
+    const contenidoDiv = document.getElementById("cuenta");
     // Modificamos el contenido de este div
     contenidoDiv.innerHTML = `
     <div class="dropdown">${userName}
@@ -19,17 +19,17 @@ function updateUILoggedIn(userName) {
             <a onclick="logout()">Salir</a>
         </div>
     </div>
-    `
+    `;
 }
 
 // --- Actualizar UI cuando NO hay sesión ---
 function updateUILoggedOut() {
     // Obtenemos el div
-    const contenidoDiv = document.getElementById("cuenta")
+    const contenidoDiv = document.getElementById("cuenta");
     // Modificamos el contenido de este div
     contenidoDiv.innerHTML = `
     <a href="./client/html/login.html">Iniciar sesion</a>
-    `
+    `;
 }
 
 // --- Función para hacer logout ---

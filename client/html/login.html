@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SaleSkip</title>
+    <title>Iniciar Sesión | Lexiscode</title>
+    <link rel="icon" href="../img/Favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/login.css">
 </head>
 
@@ -12,24 +13,26 @@
     <div class="container">
         <div class="info-panel">
             <div class="info-content">
-                <div class="asterisk">*</div>
-                <h1>Hello SaleSkip! 👋</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
+                <div class="logo-section">
+                    <img src="../img/Favicon.ico" alt="Lexiscode" class="login-logo">
+                    <h2>Lexiscode</h2>
+                </div>
+                <h1>Bienvenido de vuelta 👋</h1>
+                <p>Accede a tu cuenta para gestionar tus certificaciones y demostrar tu excelencia técnica en el desarrollo de software.</p>
             </div>
             <footer>
-                © 2022 SaleSkip. All rights reserved.
+                &copy; 2025 Lexiscode. Todos los derechos reservados.
             </footer>
         </div>
         <div class="login-panel">
-            <h2>SaleSkip</h2>
-            <h3>Welcome Back!</h3>
+            <h2>Iniciar Sesión</h2>
+            <p class="subtitle">Ingresa tus credenciales para continuar</p>
             <form id="formLogin">
                 <label for="username">Usuario</label>
-                <input type="text" id="username">
+                <input type="text" id="username" required placeholder="Tu nombre de usuario">
                 <label for="password">Contraseña</label>
-                <input type="password" id="password">
-                <button type="submit" class="btn-login">Iniciar sesion</button>
+                <input type="password" id="password" required placeholder="Tu contraseña">
+                <button type="submit" class="btn-login">Iniciar sesión</button>
             </form>
             <a href="../../index.html" class="btn-back">Volver al inicio</a>
         </div>

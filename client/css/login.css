@@ -1,53 +1,94 @@
 body {
     font-family: sans-serif;
     margin: 0;
-    background-color: #f0f2f5;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .container {
     display: flex;
-    width: 900px;
-    height: 600px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 600px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
     overflow: hidden;
+    background: white;
 }
 
 .info-panel {
-    background-color: #1a1a2e;
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);
     color: white;
-    padding: 50px;
+    padding: 50px 40px;
     width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 }
 
-.info-content .asterisk {
-    font-size: 3em;
-    color: #8a2be2;
+.info-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(138,43,226,0.1)"/></svg>');
+    opacity: 0.5;
+}
+
+.info-content {
+    position: relative;
+    z-index: 1;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.login-logo {
+    width: 50px;
+    height: 50px;
+    filter: brightness(0) invert(1);
+}
+
+.logo-section h2 {
+    font-size: 1.8em;
+    margin: 0;
+    color: #ffffff;
 }
 
 .info-content h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
+    line-height: 1.2;
+    color: #ffffff;
 }
 
 .info-content p {
-    line-height: 1.6;
+    line-height: 1.8;
+    font-size: 1.05em;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .info-panel footer {
     font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+    position: relative;
+    z-index: 1;
 }
 
 .login-panel {
     background-color: white;
-    padding: 50px;
+    padding: 50px 40px;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -55,24 +96,26 @@ body {
 }
 
 .login-panel h2 {
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bold;
-    margin-bottom: 40px;
-}
-
-.login-panel h3 {
-    font-size: 1.8em;
     margin-bottom: 10px;
+    color: #1a1a2e;
 }
 
-.login-panel p {
+.subtitle {
     margin-bottom: 30px;
     color: #666;
+    font-size: 0.95em;
 }
 
 .login-panel a {
     color: #8a2be2;
     text-decoration: none;
+    transition: color 0.3s;
+}
+
+.login-panel a:hover {
+    color: #6b22b8;
 }
 
 form {
@@ -81,43 +124,96 @@ form {
 }
 
 form label {
-    margin-bottom: 5px;
-    color: #666;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    font-size: 0.95em;
 }
 
 form input {
-    padding: 10px;
+    padding: 12px 15px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #8a2be2;
+    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+}
+
+form input::placeholder {
+    color: #aaa;
 }
 
 .btn-login {
-    background-color: #1a1a2e;
+    background-color: #8a2be2;
     color: white;
     padding: 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1em;
-    margin-bottom: 20px;
+    font-size: 1.05em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.btn-login:hover {
+    background-color: #6b22b8;
+    transform: translateY(-1px);
+}
+
+.btn-login:active {
+    transform: translateY(0);
 }
 
 .btn-back {
     background-color: transparent;
     color: #1a1a2e;
     padding: 15px;
-    border: 1px solid #1a1a2e;
-    border-radius: 5px;
+    border: 2px solid #1a1a2e;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1em;
+    font-weight: 500;
     text-align: center;
     text-decoration: none;
     display: block;
     margin-top: 10px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.forgot-password {
-    text-align: center;
-    font-size: 0.9em;
+.btn-back:hover {
+    background-color: #1a1a2e;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        max-width: 500px;
+    }
+
+    .info-panel,
+    .login-panel {
+        width: 100%;
+        padding: 40px 30px;
+    }
+
+    .info-panel {
+        min-height: 250px;
+    }
+
+    .info-content h1 {
+        font-size: 2em;
+    }
+
+    .logo-section h2 {
+        font-size: 1.5em;
+    }
 }

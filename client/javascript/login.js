@@ -1,5 +1,5 @@
 // Capturamos el formulario
-const form = document.getElementById("formLogin")
+const form = document.getElementById("formLogin");
 
 // Escuchamos el evento "submit"
 form.addEventListener("submit", async (e) => {
