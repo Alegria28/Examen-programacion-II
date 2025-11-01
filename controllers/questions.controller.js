@@ -13,9 +13,9 @@ const startQuiz = (req, res) => {
         .sort(() => Math.random() - 0.5) // Mezcla aleatoriamente
         .slice(0, 8) // Toma las primeras 8
         .map(({ id, text, options }) => ({
-            id: q.id, 
-            text: q.text, 
-            options: q.options.sort(() => Math.random() - 0.5) // Mezcla opciones
+            id, 
+            text: `${index + 1}. ${text}`, // Enumera las preguntas
+            options: options.sort(() => Math.random() - 0.5) // Mezcla opciones
     }));
 
     res.status(200).json({
