@@ -26,6 +26,9 @@ app.use("/api", authRoutes);
 const questionsRoutes = require("../back/routes/questions.routes");
 app.use("/api/questions", questionsRoutes);
 
+// (Opcional) Ruta de salud
+app.get("/health", (_req, res) => res.json({ ok: true }));
+
 // Start the server and listen for incoming requests
 app.listen(port, () => {
     console.log(`Servidor escuchando en http://${serverIp}:${PORT}`);
