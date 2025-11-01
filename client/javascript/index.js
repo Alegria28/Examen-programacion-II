@@ -99,7 +99,9 @@ quizForm.addEventListener("submit", async e => {
         </div>
     `).join("")}
     `;
-});// --- Función para verificar si hay sesión activa ---
+});
+
+// --- Función para verificar si hay sesión activa ---
 function checkSession() {
     const userName = localStorage.getItem('userName');
     if (userName) {
