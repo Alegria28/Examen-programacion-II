@@ -1,5 +1,3 @@
-const { text } = require("express");
-
 // Banco de 16 preguntas de opción múltiple
 module.exports = [
   {
