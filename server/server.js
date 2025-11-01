@@ -1,5 +1,4 @@
 const express = require('express'); // Importamos el modulo express
-const cors = require('cors'); // Importamos el módulo cors para manejar solicitudes entre dominios
 const app = express(); // Creamos una instancia de la aplicación
 const cors = require('cors');
 const port = 3000; // Definimos puerto por el cual va a escuchar nuestro servidor
@@ -38,10 +37,6 @@ app.use("/api", authRoutes);
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
 // Start the server and listen for incoming requests
-app.listen(PORT, HOST, () => {
-    console.log(`Servidor escuchando en http://${serverIp}:${PORT}`);
+app.listen(port, () => {
+    console.log(`Servidor corriendo en http://localhost:${port}`);
 });
-
-
-
-
