@@ -1,0 +1,109 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 900px;
+    height: 600px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.info-panel {
+    background-color: #1a1a2e;
+    color: white;
+    padding: 50px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-content .asterisk {
+    font-size: 3em;
+    color: #8a2be2;
+}
+
+.info-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.info-content p {
+    line-height: 1.6;
+}
+
+.info-panel footer {
+    font-size: 0.9em;
+}
+
+.login-panel {
+    background-color: white;
+    padding: 50px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-panel h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.login-panel h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.login-panel p {
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.login-panel a {
+    color: #8a2be2;
+    text-decoration: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+form input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-login {
+    background-color: #1a1a2e;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+.forgot-password {
+    text-align: center;
+    font-size: 0.9em;
+}
