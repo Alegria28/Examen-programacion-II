@@ -1,20 +1,41 @@
 const express = require('express'); // Importamos el modulo express
 const cors = require('cors'); // Importamos el módulo cors para manejar solicitudes entre dominios
 const app = express(); // Creamos una instancia de la aplicación
-const PORT = process.env.PORT || 3000; // Definimos puerto por el cual va a escuchar nuestro servidor
-const HOST = process.env.HOST || '0.0.0.0'; // Definimos host
+const cors = require('cors');
+const port = 3000; // Definimos puerto por el cual va a escuchar nuestro servidor
 
-const serverIp = '10.13.140.189'; // Reemplaza con la IP de tu servidor si es necesario
+const authRoutes = require("./routes/auth.routes");
 
-// Middleware para parsear JSON en las solicitudes entrantes
+// Middlewares mínimos
 app.use(express.json());
 
-// Configuración de CORS (permitir cualquier origen durante desarrollo)
-app.use(cors({ origin: true, methods: ['GET','POST','PUT','DELETE','PATCH'] }));
+const ALLOWED_ORIGINS = [
+    'http://localhost:5500',
+    'http://127.0.0.1:5500',
+];
 
-// Rutas para manejar preguntas
-const questionsRoutes = require("./routes/questions.routes");
-app.use("/api/questions", questionsRoutes);
+app.use(cors({
+    origin: function (origin, callback) {
+
+        if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+            return callback(null, true); // null = sin error, true = permitido
+        }
+        // Si el origen no está permitido, se rechaza la solicitud con un mensaje de error.
+        return callback(new Error('Not allowed by CORS: ' + origin));
+    },
+
+    // Especifica los métodos HTTP que este servidor aceptará.
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+
+    // Algunos navegadores antiguos esperan un código 200 (en lugar de 204) en respuestas "preflight".
+    optionsSuccessStatus: 200
+}));
+
+// Montar rutas bajo /api
+app.use("/api", authRoutes);
+
+// (Opcional) Ruta de salud
+app.get("/health", (_req, res) => res.json({ ok: true }));
 
 // Start the server and listen for incoming requests
 app.listen(PORT, HOST, () => {
