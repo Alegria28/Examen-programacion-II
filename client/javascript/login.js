@@ -41,9 +41,9 @@ form.addEventListener("submit", async (e) => {
 
             alert("Acceso permitido: " + cuenta);
 
-            document.getElementById('loginModal').style.display = 'none';
-            document.getElementById("login").value = "";
-            document.getElementById("password").value = "";
+            // Redirigimos al usuario a la pagina principal
+            window.location.replace("/");
+            
         } else {
             alert(data?.error ?? `Error ${res.status}`);
             document.getElementById("login").value = "";
