@@ -5,18 +5,22 @@
 const QUESTIONS = require("../data/questions");
 
 // --- 1) Enviar preguntas al frontend ---  
-
 const startQuiz = (req, res) => {
     console.log("Acceso al /api/questions/start");
-    // Crea una copia de todas las preguntas SIN el campo 'correct'
-    const publicQuestions = QUESTIONS
-        .sort(() => Math.random() - 0.5) // Mezcla aleatoriamente
-        .slice(0, 8) // Toma las primeras 8
-        .map(({ id, text, options }) => ({
-            id, 
-            text: `${index + 1}. ${text}`, // Enumera las preguntas
-            options: options.sort(() => Math.random() - 0.5) // Mezcla opciones
-    }));
+    // Crear una copia segura del banco y devolver 8 preguntas sin la clave 'correct'
+    const pool = Array.isArray(QUESTIONS) ? QUESTIONS.slice() : [];
+
+    const shuffled = pool.sort(() => Math.random() - 0.5).slice(0, 8);
+
+    const publicQuestions = shuffled.map((q, index) => {
+        // Copiamos las opciones antes de mezclarlas para no mutar el original
+        const options = Array.isArray(q.options) ? [...q.options].sort(() => Math.random() - 0.5) : [];
+        return {
+            // SOLO QUITAR ESTA LÍNEA: id: q.id,
+            text: `${index + 1}. ${q.text}`,
+            options
+        };
+    });
 
     res.status(200).json({
         message: "Preguntas listas. ¡Éxito!",
@@ -52,7 +56,6 @@ const submitAnswers = (req, res) => {
 
         // 3.4) Agrega la información detallada de la pregunta
         details.push({
-            id: q.id,
             text: q.text,
             yourAnswer: user ? user.answer : null,
             correctAnswer: q.correct,
