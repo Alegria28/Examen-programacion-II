@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { startQuiz, submitAnswers } = require("../controllers/questions.controller");
+const { startQuiz, submitAnswers } = require("../server/controllers/questions.controller");
 
 // POST que envía preguntas
 router.post("/start", startQuiz);
