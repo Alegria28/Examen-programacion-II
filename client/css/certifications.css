@@ -37,69 +37,95 @@ nav a {
     color: #ffffff;
 }
 
-.free-weekend {
-    background-color: #00c2a8;
-    padding: 8px 15px;
-    border-radius: 20px;
-}
-
-.hero {
+/* Estilos para las cartas de certificaciones */
+.certifications-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 50px;
-    gap: 50px;
+    gap: 30px;
+    padding: 50px 20px;
+    flex-wrap: wrap;
     max-width: 1200px;
-    margin: auto;
+    margin: 0 auto;
 }
 
-.hero-text {
-    max-width: 500px;
-}
-
-.hero-text h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
-}
-
-.modern {
-    color: #8a2be2;
-}
-
-.btn {
-    display: inline-block;
-    padding: 15px 30px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
+.certification-card {
+    background-color: #252547;
+    border-radius: 12px;
+    padding: 30px;
+    width: 300px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suaviza la transición */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
-.btn-github {
-    background-color: transparent;
-    border: 1px solid #8a2be2;
-    color: #ffffff;
-    width: calc(100% - 62px);
+.certification-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.cert-icon {
+    font-size: 3.5em;
     margin-bottom: 20px;
 }
 
-.btn-signup {
+.python-icon {
+    color: #3776AB;
+}
+
+.java-icon {
+    color: #ED8B00;
+}
+
+.cpp-icon {
+    color: #00599C;
+}
+
+.certification-card h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.certification-card p {
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.cert-btn {
+    display: inline-block;
+    padding: 12px 25px;
     background-color: #8a2be2;
-    color: #ffffff;
-    border: none;
-    width: 100%;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-input[type="email"] {
-    padding: 15px;
+    color: white;
+    text-decoration: none;
     border-radius: 8px;
-    border: 1px solid #4f4f4f;
-    background-color: #1a1a2e;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: 90%;
+    text-align: center;
+}
+
+.cert-btn:hover {
+    background-color: #6a1cb0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5em;
+    margin: 40px 0 20px;
     color: #ffffff;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #cccccc;
+    margin-bottom: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
 }
