@@ -35,7 +35,6 @@ nav ul {
 nav a {
     text-decoration: none;
     color: #ffffff;
-    cursor: pointer;
 }
 
 .free-weekend {
@@ -65,11 +64,6 @@ nav a {
 
 .modern {
     color: #8a2be2;
-}
-
-.hero-text p {
-    margin-bottom: 30px;
-    line-height: 1.6;
 }
 
 .btn {
@@ -108,39 +102,4 @@ input[type="email"] {
     border: 1px solid #4f4f4f;
     background-color: #1a1a2e;
     color: #ffffff;
-}
-
-.hero-image img {
-    max-width: 500px;
-}
-
-.dropdown {
-    position: relative;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #1f1f3d;
-    min-width: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    padding: 12px 0;
-    border-radius: 8px;
-    z-index: 1;
-    border: 1px solid #8a2be2;
-}
-
-.dropdown-content a {
-    color: #ffffff;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #8a2be2;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
 }
