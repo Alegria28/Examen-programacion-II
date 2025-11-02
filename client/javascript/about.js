@@ -43,14 +43,30 @@ async function logout() {
         });
 
         if (res.ok) {
-            alert('Sesión cerrada correctamente');
+            await Swal.fire({
+                title: '¡Sesión cerrada!',
+                text: 'Has cerrado sesión correctamente',
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            });
         } else {
             const data = await res.json();
-            alert(data?.error ?? `Error al cerrar sesión`);
+            await Swal.fire({
+                title: 'Error',
+                text: data?.error ?? 'Error al cerrar sesión',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
     } catch (err) {
         console.error("Error al conectar con el servidor:", err);
-        alert("Error de conexión");
+        await Swal.fire({
+            title: 'Error de conexión',
+            text: 'No se pudo conectar con el servidor',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     } finally {
         // Siempre limpiar localStorage y actualizar UI, incluso si hay error
         localStorage.removeItem('token');

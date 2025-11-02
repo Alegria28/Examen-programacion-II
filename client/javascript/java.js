@@ -13,7 +13,12 @@ btnCargar.addEventListener("click", async () => {
     const token = localStorage.getItem('authToken'); // o sessionStorage
 
     if (!token) {
-        alert("Debes iniciar sesión primero para realizar el quiz");
+        await Swal.fire({
+            title: 'Autenticación requerida',
+            text: 'Debes iniciar sesión primero para realizar el quiz',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
         // Redirigir al login
         // window.location.href = "/login";
         return;
@@ -33,7 +38,12 @@ btnCargar.addEventListener("click", async () => {
         // Verificar si la respuesta no es exitosa
         if (!res.ok) {
             if (res.status === 401) {
-                alert("Sesión expirada o inválida. Por favor inicia sesión nuevamente.");
+                await Swal.fire({
+                    title: 'Sesión expirada',
+                    text: 'Tu sesión ha expirado. Por favor inicia sesión nuevamente',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
                 // Limpiar token y redirigir
                 localStorage.removeItem('authToken');
                 // window.location.href = "/login";
@@ -67,7 +77,12 @@ btnCargar.addEventListener("click", async () => {
 
     } catch (error) {
         console.error("Error al cargar preguntas:", error);
-        alert("Error al cargar las preguntas: " + error.message);
+        await Swal.fire({
+            title: 'Error',
+            text: 'Error al cargar las preguntas: ' + error.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     }
 });
 
@@ -150,14 +165,30 @@ async function logout() {
         });
 
         if (res.ok) {
-            alert('Sesión cerrada correctamente');
+            await Swal.fire({
+                title: '¡Sesión cerrada!',
+                text: 'Has cerrado sesión correctamente',
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            });
         } else {
             const data = await res.json();
-            alert(data?.error ?? `Error al cerrar sesión`);
+            await Swal.fire({
+                title: 'Error',
+                text: data?.error ?? 'Error al cerrar sesión',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
     } catch (err) {
         console.error("Error al conectar con el servidor:", err);
-        alert("Error de conexión");
+        await Swal.fire({
+            title: 'Error de conexión',
+            text: 'No se pudo conectar con el servidor',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     } finally {
         // Siempre limpiar localStorage y actualizar UI, incluso si hay error
         localStorage.removeItem('token');

@@ -39,19 +39,35 @@ form.addEventListener("submit", async (e) => {
             localStorage.setItem('token', token);
             localStorage.setItem('userName', cuenta);
 
-            alert("Acceso permitido: " + cuenta);
+            let timerInterval;
+            await Swal.fire({
+                title: "Sesion iniciada",
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false
+            });
 
             // Redirigimos al usuario a la pagina principal
             window.location.replace("/");
 
         } else {
-            alert(data?.error ?? `Error ${res.status}`);
-            document.getElementById("login").value = "";
+            await Swal.fire({
+                title: 'Error de inicio de sesión',
+                text: data?.error ?? `Error ${res.status}`,
+                icon: 'error',
+                confirmButtonText: 'Intentar de nuevo'
+            });
+            document.getElementById("username").value = "";
             document.getElementById("password").value = "";
         }
 
     } catch (err) {
         console.error("Error al conectar con el servidor:", err);
-        alert("Error de conexión con el servidor");
+        await Swal.fire({
+            title: 'Error de conexión',
+            text: 'No se pudo conectar con el servidor',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     }
 });
