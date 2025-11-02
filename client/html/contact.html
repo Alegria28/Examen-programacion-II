@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificación Java | Lexiscode</title>
+    <title>Contacto - LexisCode</title>
     <link rel="icon" href="../img/marca/Favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/java.css">
+    <link rel="stylesheet" href="../css/contact.css">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
@@ -14,8 +14,8 @@
 <body>
     <header>
         <nav>
-            <a href="../../index.html" class="logo">
-                <img src="../img/marca/Favicon.ico" alt="Lexiscode logo">
+            <a href="../../index.html" class="logo" title="Ir al inicio">
+                <img src="../img/marca/Favicon.ico" alt="LexisCode" class="logo-img">
             </a>
             <ul>
                 <li><a href="../../index.html">Inicio</a></li>
@@ -30,17 +30,26 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <section class="hero">
-            <div class="quiz-container">
-                <h1>Certificación de Java</h1>
-                <button id="btnCargar" class="btn-primary">EMPEZAR PRUEBA</button>
-                <form id="quizForm" style="display:none;">
-                    <div id="listaPreguntas"></div>
-                    <button type="submit" class="btn-primary">Enviar respuestas</button>
-                </form>
 
-                <div id="resultado"></div>
+    <main>
+        <section class="contact-hero">
+            <div class="contact-card">
+                <h1>Contáctanos</h1>
+                <p>Déjanos tu nombre, correo y tu duda o mensaje. Te responderemos pronto.</p>
+
+                <form id="contactForm">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+
+                    <label for="message">Mensaje / Pregunta</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Escribe tu pregunta aquí..."
+                        required></textarea>
+
+                    <button type="submit" class="btn-send">Enviar mensaje</button>
+                </form>
             </div>
         </section>
     </main>
@@ -56,7 +65,7 @@
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../javascript/java.js"></script>
+    <script src="../javascript/contact.js"></script>
 </body>
 
 </html>
