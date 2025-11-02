@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificaciones para desarrolladores</title>
+
+    <link rel="stylesheet" href="../css/certificationsCards.css">
+</head>
+    <body>
+         <header>
+        <nav>
+            <a href="../../index.html" class="logo">certificates.dev</a>
+            <ul>
+                <li><a href="certifications.html">Certificaciones</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="about.html">Nosotros</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h1 class="section-title">Certificación C++ Specialist</h1>
+            <p class="section-subtitle">Domina uno de los lenguajes más versátiles y demandados. Aprende desde fundamentos hasta desarrollo web, ciencia de datos y automatización.</p>
+            
+            <div class="certification-details">
+                <div class="details-card">
+                    <h3>Descripción</h3>
+                    <ul class="details-list">
+                        <li><span class="feature-icon">✓</span> Especialización en sistemas y alto rendimiento</li>
+                        <li><span class="feature-icon">✓</span> Desarrollo de aplicaciones críticas y optimizadas</li>
+                        <li><span class="feature-icon">✓</span> Manejo avanzado de memoria y recursos</li>
+                        <li><span class="feature-icon">✓</span> Programación orientada a sistemas</li>
+                        <li><span class="feature-icon">✓</span> Enfoque en performance y eficiencia</li>
+                    </ul>
+                </div>
+                
+                <div class="details-card">
+                    <h3>Ventajas</h3>
+                    <ul class="details-list">
+                        <li><span class="feature-icon">🚀</span> Incremento salarial promedio del 40%</li>
+                        <li><span class="feature-icon">💼</span> Demanda en gaming y sistemas embebidos</li>
+                        <li><span class="feature-icon">🌎</span> Acceso a empresas de tecnología avanzada</li>
+                        <li><span class="feature-icon">📈</span> Valorada en sistemas críticos</li>
+                        <li><span class="feature-icon">🔄</span> Reconocimiento en high-performance computing</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="exam-info">
+                <div class="info-card">
+                    <h4>Puntuación Mínima</h4>
+                    <div class="info-value">75%</div>
+                    <p class="info-description">Para aprobar el examen y obtener tu certificación</p>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Tiempo Límite</h4>
+                    <div class="info-value">30 min</div>
+                    <p class="info-description">Para completar todas las preguntas del examen</p>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Preguntas</h4>
+                    <div class="info-value">8</div>
+                    <p class="info-description">Preguntas teóricas de opción múltiple</p>
+                </div>
+            </div>
+            
+            <div class="payment-section">
+                <h3>Obtén tu Certificación Python</h3>
+                <div class="price">$99 <span class="price-period">USD</span></div>
+                <p>Pago único - Acceso de por vida al certificado</p>
+                
+                <div id="payment-status">
+                    <button id="pay-btn" class="btn btn-primary">Realizar Pago</button>
+                </div>
+                
+                <div id="exam-access" class="hidden">
+                    <div class="paid-indicator">✅ Pago realizado exitosamente</div>
+                    <p>¡Estás listo para comenzar tu examen de certificación!</p>
+                    <button id="start-exam-btn" class="btn btn-success">Comenzar Examen</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('pay-btn').addEventListener('click', function() {
+            // Simular el proceso de pago
+            setTimeout(function() {
+                document.getElementById('payment-status').classList.add('hidden');
+                document.getElementById('exam-access').classList.remove('hidden');
+            }, 1000); // Simula un retraso de 1 segundo para el pago
+        });
+    </script>
+</body>
+</html>
