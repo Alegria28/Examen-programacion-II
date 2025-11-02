@@ -2,6 +2,17 @@ const API = "http://localhost:3000/api/questions";
 const btnPagar = document.getElementById("pay-btn");
 
 btnPagar.addEventListener("click", async () => {
+
+    // Verificar si hay token de autenticación
+    const token = localStorage.getItem('token'); 
+
+    if (!token) {
+        alert("Debes iniciar sesión primero para realizar el quiz");
+        // Redirigir al login
+        // window.location.href = "/login";
+        return;
+    }
+
     // Simular el proceso de pago
     setTimeout(function() {
         document.getElementById('payment-status').classList.add('hidden');
