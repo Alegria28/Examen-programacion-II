@@ -6,6 +6,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 main {
@@ -28,12 +29,18 @@ nav {
 }
 
 .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     font-weight: bold;
     font-size: 1.2em;
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .logo img {
     height: 55px;
+    object-fit: contain;
 }
 
 nav ul {
@@ -58,60 +65,102 @@ nav a:hover {
     background-color: #8a2be2;
 }
 
-.hero {
+/* Estilos para las cartas de certificaciones */
+.certifications-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 20px;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.certification-card {
+    background-color: #252547;
+    border-radius: 12px;
+    padding: 25px;
+    width: 280px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 80px 50px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-.hero h1 {
-    font-size: 3em;
-    margin-bottom: 50px;
-    color: #8a2be2;
-}
-
-.certifications-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    width: 100%;
-}
-
-.cert-card {
-    background-color: #1f1f3d;
-    padding: 30px;
-    border-radius: 10px;
-    border: 1px solid #2a2a4a;
     text-align: center;
 }
 
-.cert-card h2 {
-    color: #8a2be2;
+.certification-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.cert-icon {
+    font-size: 3em;
     margin-bottom: 15px;
 }
 
-.cert-card p {
-    line-height: 1.6;
-    margin-bottom: 20px;
+.python-icon {
+    color: #3776AB;
 }
 
-.btn-cert {
-    display: inline-block;
-    padding: 15px 30px;
-    background-color: #8a2be2;
+.java-icon {
+    color: #ED8B00;
+}
+
+.cpp-icon {
+    color: #00599C;
+}
+
+.js-icon {
+    color: #F7DF1E;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.certification-card h2 {
+    font-size: 1.5em;
+    margin-bottom: 12px;
     color: #ffffff;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: background-color 0.3s;
 }
 
-.btn-cert:hover {
-    background-color: #6b22b8;
+.certification-card p {
+    color: #cccccc;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.cert-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #8a2be2;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: 90%;
+    text-align: center;
+}
+
+.cert-btn:hover {
+    background-color: #6a1cb0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2em;
+    margin: 30px 0 15px;
+    color: #ffffff;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #cccccc;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
 }
 
 footer {

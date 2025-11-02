@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificación Java | Lexiscode</title>
+    <title>Certificación Python | Lexiscode</title>
     <link rel="icon" href="../img/marca/Favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/certificationsCards.css">
     <!-- SweetAlert2 CSS -->
@@ -32,30 +32,30 @@
     </header>
     <main>
         <section class="hero">
-            <h1 class="section-title">Certificación Java Professional</h1>
-            <p class="section-subtitle">Conviértete en experto en el lenguaje empresarial por excelencia. Domina
-                desarrollo backend, Spring Framework y aplicaciones empresariales.</p>
+            <h1 class="section-title">Certificación Python Developer</h1>
+            <p class="section-subtitle">Domina uno de los lenguajes más versátiles y demandados. Aprende desde
+                fundamentos hasta desarrollo web, ciencia de datos y automatización.</p>
 
             <div class="certification-details">
                 <div class="details-card">
                     <h3>Descripción</h3>
                     <ul class="details-list">
-                        <li><span class="feature-icon">✓</span> Certificación Oracle reconocida globalmente</li>
-                        <li><span class="feature-icon">✓</span> Enfoque en desarrollo empresarial y backend</li>
-                        <li><span class="feature-icon">✓</span> Valida habilidades en Java SE y EE</li>
-                        <li><span class="feature-icon">✓</span> Incluye Spring Framework y Hibernate</li>
-                        <li><span class="feature-icon">✓</span> Certificado digital oficial</li>
+                        <li><span class="feature-icon">✓</span> Certificación reconocida internacionalmente</li>
+                        <li><span class="feature-icon">✓</span> Mejora tus oportunidades laborales</li>
+                        <li><span class="feature-icon">✓</span> Valida tus habilidades en Python</li>
+                        <li><span class="feature-icon">✓</span> Acceso a comunidad exclusiva</li>
+                        <li><span class="feature-icon">✓</span> Certificado digital verificable</li>
                     </ul>
                 </div>
 
                 <div class="details-card">
                     <h3>Ventajas</h3>
                     <ul class="details-list">
-                        <li><span class="feature-icon">🚀</span> Incremento salarial promedio del 30%</li>
-                        <li><span class="feature-icon">💼</span> Alta demanda en el mercado empresarial</li>
-                        <li><span class="feature-icon">🌎</span> Reconocimiento Oracle oficial</li>
-                        <li><span class="feature-icon">📈</span> Acceso a posiciones senior</li>
-                        <li><span class="feature-icon">🔄</span> Actualización continua incluida</li>
+                        <li><span class="feature-icon">🚀</span> Incremento salarial promedio del 25%</li>
+                        <li><span class="feature-icon">💼</span> Acceso a bolsa de trabajo exclusiva</li>
+                        <li><span class="feature-icon">🌎</span> Reconocimiento global</li>
+                        <li><span class="feature-icon">📈</span> Mejora tu perfil profesional</li>
+                        <li><span class="feature-icon">🔄</span> Actualizaciones gratuitas</li>
                     </ul>
                 </div>
             </div>
@@ -63,13 +63,13 @@
             <div class="exam-info">
                 <div class="info-card">
                     <h4>Puntuación Mínima</h4>
-                    <div class="info-value">80%</div>
+                    <div class="info-value">75%</div>
                     <p class="info-description">Para aprobar el examen y obtener tu certificación</p>
                 </div>
 
                 <div class="info-card">
                     <h4>Tiempo Límite</h4>
-                    <div class="info-value">30 min</div>
+                    <div class="info-value">40 min</div>
                     <p class="info-description">Para completar todas las preguntas del examen</p>
                 </div>
 
@@ -81,7 +81,7 @@
             </div>
 
             <div class="payment-section">
-                <h3>Obtén tu Certificación Java</h3>
+                <h3>Obtén tu Certificación Python</h3>
                 <div class="price">$99 <span class="price-period">USD</span></div>
                 <p>Pago único - Acceso de por vida al certificado</p>
 
@@ -90,8 +90,8 @@
                 </div>
 
                 <div id="exam-access" class="hidden">
-                    <div class="paid-indicator">✅ Pago realizado exitosamente</div>
-                    <p>¡Estás listo para comenzar tu examen de certificación Java!</p>
+                    <div class="paid-indicator">Esta certificación no está disponible por el momento</div>
+                    <p>Disponible a partir del 10 de octubre de 2025</p>
                     <button id="start-exam-btn" class="btn btn-success">Comenzar Examen</button>
                 </div>
             </div>
@@ -110,6 +110,15 @@
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../javascript/java.js"></script>
+    <script>
+        document.getElementById('pay-btn').addEventListener('click', function () {
+            // Simular el proceso de pago
+            setTimeout(function () {
+                document.getElementById('payment-status').classList.add('hidden');
+                document.getElementById('exam-access').classList.remove('hidden');
+            }, 1000); // Simula un retraso de 1 segundo para el pago
+        });
+    </script>
 </body>
 
 </html>
