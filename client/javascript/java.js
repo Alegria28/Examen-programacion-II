@@ -1,11 +1,21 @@
 const API = "http://localhost:3000/api/questions";
-const btnCargar = document.getElementById("btnCargar");
+const btnPagar = document.getElementById("pay-btn");
+
+btnPagar.addEventListener("click", async () => {
+    // Simular el proceso de pago
+    setTimeout(function() {
+        document.getElementById('payment-status').classList.add('hidden');
+        document.getElementById('exam-access').classList.remove('hidden');
+    }, 1000); // Simula un retraso de 1 segundo para el pago
+});
+
+/*
 const quizForm = document.getElementById("quizForm");
 const listaPreguntas = document.getElementById("listaPreguntas");
 const resultado = document.getElementById("resultado");
 let preguntas = [];
 
-btnCargar.addEventListener("click", async () => {
+btnPagar.addEventListener("click", async () => {
     // Verificar si hay token de autenticación
     const token = localStorage.getItem('authToken'); // o sessionStorage
 
@@ -17,6 +27,12 @@ btnCargar.addEventListener("click", async () => {
     }
 
     console.log("Enviando petición a /api/questions/start");
+
+    // Simular el proceso de pago
+        setTimeout(function() {
+            document.getElementById('payment-status').classList.add('hidden');
+            document.getElementById('exam-access').classList.remove('hidden');
+        }, 1000); // Simula un retraso de 1 segundo para el pago
 
     try {
         const res = await fetch(`${API}/start`, {
@@ -99,4 +115,4 @@ quizForm.addEventListener("submit", async e => {
         </div>
     `).join("")}
     `;
-});
+});*/
