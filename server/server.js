@@ -8,9 +8,18 @@ const authRoutes = require("./routes/auth.routes");
 // Middlewares mínimos
 app.use(express.json());
 
+// --- Modificar respectivamente con la ip actual de la maquina servidor ---
+const ipServidor = "10.0.0.19";
+
 const ALLOWED_ORIGINS = [
     'http://localhost:5500',
     'http://127.0.0.1:5500',
+    // IP del servidor
+    `http://${ipServidor}:5500`,
+    // IP's permitidas al servidor
+    "http://10.0.0.15:5500", // Alegria
+    "http://0.0.0.0:5500", // Oscar
+    "http://0.0.0.0:5500" // Darely
 ];
 
 app.use(cors({
@@ -37,6 +46,6 @@ app.use("/api", authRoutes);
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
 // Start the server and listen for incoming requests
-app.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`);
+app.listen(port, ipServidor, () => {
+    console.log(`Servidor corriendo en: http://${ipServidor}:${port}`);
 });
