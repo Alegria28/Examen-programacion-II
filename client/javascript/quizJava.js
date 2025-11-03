@@ -40,7 +40,8 @@ function updateUILoggedOut() {
 // --- Función para hacer logout ---
 async function logout() {
     try {
-        const res = await fetch("http://192.168.1.71:3000/api/logout", {
+        // CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR
+        const res = await fetch("http://localhost:3000/api/logout", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem('token')}`
