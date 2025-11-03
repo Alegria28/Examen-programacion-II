@@ -76,3 +76,32 @@ async function logout() {
 }
 
 checkSession();
+
+document.getElementById('pay-btn').addEventListener('click', function () {
+    // Verificar si el usuario está logueado
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        alert('Debes iniciar sesión para realizar el pago.');
+        return;
+    }
+
+    // Simular el proceso de pago
+    setTimeout(function () {
+        document.getElementById('payment-status').classList.add('hidden');
+        document.getElementById('exam-access').classList.remove('hidden');
+    }, 1000); // Simula un retraso de 1 segundo para el pago
+});
+
+document.getElementById('start-exam-btn').addEventListener('click', function () {
+    // Verificar si el usuario está logueado
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        alert('Debes iniciar sesión para realizar el pago.');
+        return;
+    }
+
+    // Redirigir al usuario a la página del examen
+    window.location.href = './examenJava.html';
+});
