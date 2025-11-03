@@ -76,51 +76,40 @@ async function logout() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+// --- Función para verificar el estado del pago ---
+async function verificarEstadoPago() {
+    const userName = localStorage.getItem('userName');
 
-    const payBtn = document.getElementById('pay-btn');
-    const startExamBtn = document.getElementById('start-exam-btn');
-
-    if (payBtn) {
-        payBtn.addEventListener('click', function () {
-            Swal.fire({
-                title: 'Procesando pago...',
-                timer: 1500,
-                didOpen: () => {
-                    Swal.showLoading()
-                }
-            }).then(() => {
-                document.getElementById('payment-status').classList.add('hidden');
-                document.getElementById('exam-access').classList.remove('hidden');
-            });
-        });
+    // Si no hay sesión, no hacer nada
+    if (!userName) {
+        return;
     }
 
-    if (startExamBtn) {
-        startExamBtn.addEventListener('click', function () {
-            const token = localStorage.getItem('token');
-
-            if (!token) {
-                Swal.fire({
-                    title: 'Acceso Denegado',
-                    text: 'Debes iniciar sesión para poder comenzar el examen.',
-                    icon: 'warning',
-                    confirmButtonText: 'Iniciar Sesión'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = './login.html';
-                    }
-                });
-                return;
-            }
-            // Si hay token, redirigir al usuario a la página del examen
-            window.location.href = './quizJava.html';
+    try {
+        const res = await fetch("http://localhost:3000/api/usuario/obtenerUsuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                cuenta: userName
+            })
         });
-    }
-});
-checkSession();
 
-document.getElementById('pay-btn').addEventListener('click', function () {
+        const data = await res.json();
+
+        if (res.ok && data.usuario && data.usuario.cursoPagado === "true") {
+            // Si ya pagó, mostrar el acceso al examen
+            document.getElementById('payment-status').classList.add('hidden');
+            document.getElementById('exam-access').classList.remove('hidden');
+        }
+    } catch (error) {
+        
+    }
+}
+
+// En caso de que se le haga click al botón de pagar, obtenemos el botón y le agregamos un listener
+document.getElementById('pay-btn').addEventListener('click', async (e) => {
     // Verificar si el usuario está logueado
     const token = localStorage.getItem('token');
 
@@ -138,21 +127,175 @@ document.getElementById('pay-btn').addEventListener('click', function () {
         return;
     }
 
-    // Simular el proceso de pago
-    setTimeout(function () {
-        document.getElementById('payment-status').classList.add('hidden');
-        document.getElementById('exam-access').classList.remove('hidden');
-    }, 1000); // Simula un retraso de 1 segundo para el pago
+    // Obtenemos la cuenta que esta logueada
+    const userName = localStorage.getItem('userName');
+
+    if (!userName) {
+        await Swal.fire({
+            title: 'Error',
+            text: 'No se pudo obtener el nombre de usuario del almacenamiento local',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+
+    // Mostrar loading mientras se procesa
+    Swal.fire({
+        title: 'Procesando...',
+        text: 'Verificando información del usuario',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // Pequeño delay para que el loading sea visible
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Obtenemos los datos de la cuenta 
+    try {
+        // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
+        const res = await fetch("http://localhost:3000/api/usuario/obtenerUsuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                cuenta: userName
+            })
+        });
+
+        // Intentamos parsear el JSON
+        let data;
+        try {
+            data = await res.json();
+        } catch (parseErr) {
+            
+            await Swal.fire({
+                title: 'Error de Respuesta',
+                text: 'El servidor respondió con un formato incorrecto',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        // Revisar la respuesta
+        if (res.ok && data.usuario) {
+            // Obtenemos la informacion de la cuenta para ver si esta ya ha pagado
+            const pagado = data.usuario.cursoPagado;
+
+            // Si ya pagó, mostrar mensaje
+            if (pagado === "true") {
+                
+                await Swal.fire({
+                    title: 'Ya has pagado',
+                    text: 'Ya has realizado el pago de este curso anteriormente',
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                });
+
+                // Mostrar el acceso al examen
+                document.getElementById('payment-status').classList.add('hidden');
+                document.getElementById('exam-access').classList.remove('hidden');
+                return;
+            }
+
+            // Si no ha pagado el curso, llamamos a nuestra API para que lo pague
+            if (pagado === "false") {
+                // Actualizar el mensaje de loading
+                Swal.update({
+                    title: 'Procesando pago...',
+                    text: 'Por favor espera'
+                });
+
+                // Pequeño delay para que el usuario vea el cambio de mensaje
+                await new Promise(resolve => setTimeout(resolve, 800));
+
+                try {
+                    // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
+                    const resPago = await fetch("http://localhost:3000/api/usuario/realizarPago", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            cuenta: userName
+                        })
+                    });
+
+                    const dataPago = await resPago.json();
+
+                    if (resPago.ok) {
+                        // Actualizar el DOM directamente
+                        document.getElementById('payment-status').classList.add('hidden');
+                        document.getElementById('exam-access').classList.remove('hidden');
+
+                        
+                    } else {
+                        
+                        await new Promise(resolve => setTimeout(resolve, 300));
+
+                        await Swal.fire({
+                            title: 'Error al procesar el pago',
+                            text: dataPago.error || 'Ocurrió un error al procesar tu pago',
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false
+                        });
+                    }
+                } catch (errorPago) {
+                    
+                    await new Promise(resolve => setTimeout(resolve, 300));
+
+                    await Swal.fire({
+                        title: 'Error de Conexión',
+                        text: 'No se pudo conectar con el servidor para procesar el pago',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false
+                    });
+                }
+            }
+
+        } else {
+            
+            await new Promise(resolve => setTimeout(resolve, 300));
+
+            await Swal.fire({
+                title: 'Error',
+                text: data.error || 'No se pudo obtener la información del usuario',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                allowOutsideClick: false
+            });
+        }
+
+    } catch (error) {
+        
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        await Swal.fire({
+            title: 'Error de Conexión',
+            text: 'No se pudo conectar con el servidor. Verifica tu conexión a internet',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            allowOutsideClick: false
+        });
+    }
+
 });
 
+// En caso de que se le haga click al botón de realizar el examen, obtenemos el botón y le agregamos un listener
 document.getElementById('start-exam-btn').addEventListener('click', function () {
-    // Verificar si el usuario está logueado
     const token = localStorage.getItem('token');
 
     if (!token) {
         Swal.fire({
             title: 'Acceso Denegado',
-            text: 'Debes iniciar sesión para comenzar el examen.',
+            text: 'Debes iniciar sesión para poder comenzar el examen.',
             icon: 'warning',
             confirmButtonText: 'Iniciar Sesión'
         }).then((result) => {
@@ -163,6 +306,9 @@ document.getElementById('start-exam-btn').addEventListener('click', function () 
         return;
     }
 
-    // Redirigir al usuario a la página del examen
-    window.location.href = './examenJava.html';
+    // Si hay token, redirigir al usuario a la página del examen
+    window.location.href = './quizJava.html';
 });
+
+checkSession();
+verificarEstadoPago();

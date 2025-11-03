@@ -6,12 +6,13 @@ const port = 3000; // Definimos puerto por el cual va a escuchar nuestro servido
 const authRoutes = require("./routes/auth.routes");
 const questionsRoutes = require("./routes/questions.routes");
 const certificadoRoutes = require("./routes/certificado.routes");
+const userRoutes = require("./routes/user.routes")
 
 // Middlewares mínimos
 app.use(express.json());
 
 // --- Modificar respectivamente con la ip actual de la maquina servidor ---
-const ipServidor = "192.168.100.7";
+const ipServidor = "127.0.0.1";
 
 const ALLOWED_ORIGINS = [
     'http://localhost:5500',
@@ -48,13 +49,12 @@ app.use(cors({
 app.use("/api", authRoutes);
 app.use("/api/questions", questionsRoutes);
 app.use("/api/certificados", certificadoRoutes);
+app.use("/api/usuario", userRoutes);
 
 // (Opcional) Ruta de salud
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
 // Start the server and listen for incoming requests
-app.listen(port, () => {
-    console.log(`Servidor corriendo en:`);
-    console.log(`- http://localhost:${port}`);
-    console.log(`- http://${ipServidor}:${port}`);
+app.listen(port, ipServidor, () => {
+    console.log(`Servidor corriendo en: http://${ipServidor}:${port}`);
 });

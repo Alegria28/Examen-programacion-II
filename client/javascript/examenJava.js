@@ -6,7 +6,6 @@ btnPDF.addEventListener("click", async () => {
     if (confirm("¿Deseas descargar tu certificado en PDF?")) {
         try {
             const token = localStorage.getItem('token'); // Obtener el token almacenado
-            console.log("🔑 Token encontrado:", !!token);
             // Verificación solo en frontend
             //const score = parseInt(document.querySelector('h2').textContent.split('/')[0].split(':')[1].trim());
             if (!token) {
@@ -22,8 +21,6 @@ btnPDF.addEventListener("click", async () => {
 
                 // URL completa
                 const urlCompleta = `${API_CERTIFICADO}/certificado`;
-                console.log("📡 URL completa llamada:", urlCompleta);
-                console.log("📡 Headers:", { "Authorization": `Bearer ${token}` });
 
                 // Llamar al backend para generar y descargar el certificado (sin body)
                 const response = await fetch(urlCompleta, {
@@ -32,9 +29,6 @@ btnPDF.addEventListener("click", async () => {
                         "Authorization": `Bearer ${token}`
                     }
                 });
-
-                console.log("📡 Status:", response.status);
-                console.log("📡 Response OK:", response.ok);
                 /*
                 if (response.ok) {
                     const blob = await response.blob(); // Obtener el PDF como blob
@@ -50,7 +44,6 @@ btnPDF.addEventListener("click", async () => {
                 }*/
                 if (response.ok) {
                     const blob = await response.blob();
-                    console.log("📄 Blob size:", blob.size);
 
                     const url = window.URL.createObjectURL(blob);
                     const a = document.createElement('a');
@@ -58,11 +51,9 @@ btnPDF.addEventListener("click", async () => {
                     a.download = `certificado.pdf`;
                     a.click();
                     window.URL.revokeObjectURL(url);
-                    console.log("✅ PDF descargado exitosamente");
                 } else {
                     // Obtener el mensaje de error del servidor
                     const errorText = await response.text();
-                    console.log("❌ Error del servidor:", response.status, errorText);
                     alert(`Error del servidor (${response.status}): ${errorText}`);
                 }
 

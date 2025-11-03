@@ -59,24 +59,3 @@ exports.logout = (req, res) => {
         });
     }
 };
-
-// Función controladora para obtener el perfil del usuario autenticado
-exports.getProfile = (req, res) => {
-    const userId = req.userId; // El userId viene del middleware verifyToken
-
-    // Buscar el usuario en la base de datos
-    const user = users.find(u => u.cuenta === userId);
-
-    if (!user) {
-        return res.status(404).json({
-            error: "Usuario no encontrado"
-        });
-    }
-
-    // Devolver información del usuario (sin contraseña)
-    return res.status(200).json({
-        usuario: {
-            cuenta: user.cuenta
-        }
-    });
-};

@@ -4,7 +4,6 @@ let currentExamQuestions = [];
 
 // --- 1) Enviar preguntas al frontend ---  
 const startQuiz = (req, res) => {
-    console.log("Acceso al /api/questions/start");
     
     // 1. Baraja y toma 8 preguntas (tu lógica está bien)
     const pool = Array.isArray(QUESTIONS) ? QUESTIONS.slice() : [];
@@ -37,7 +36,6 @@ const startQuiz = (req, res) => {
 
 // --- 2) Recibir y evaluar respuestas ---
 const submitAnswers = (req, res) => {
-    console.log("Acceso al /api/questions/submit");
     const userAnswers = Array.isArray(req.body.answers) ? req.body.answers : [];
 
     let score = 0;
