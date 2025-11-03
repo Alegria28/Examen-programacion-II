@@ -35,7 +35,7 @@ function updateUILoggedOut() {
 // --- Función para hacer logout ---
 async function logout() {
     try {
-        // CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR
+        // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
         const res = await fetch("http://localhost:3000/api/logout", {
             method: "POST",
             headers: {
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (startExamBtn) {
         startExamBtn.addEventListener('click', function () {
             const token = localStorage.getItem('token');
-        
+
             if (!token) {
                 Swal.fire({
                     title: 'Acceso Denegado',

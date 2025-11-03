@@ -1,6 +1,4 @@
 /* --- 1. LAYOUT BÁSICO Y STICKY FOOTER --- */
-/* (Tomado de tus otros CSS para mantener la armonía) */
-/* */
 
 body {
     background-color: #1a1a2e;
@@ -13,11 +11,11 @@ body {
 }
 
 main {
-    flex: 1; /* Esta línea es la clave para empujar el footer hacia abajo */
+    flex: 1;
+    /* Esta línea es la clave para empujar el footer hacia abajo */
 }
 
 /* --- 2. HEADER Y NAVEGACIÓN --- */
-/* (Tomado de tus otros CSS) */
 header {
     padding: 20px 50px;
     display: flex;
@@ -108,7 +106,6 @@ nav a:hover {
 }
 
 /* --- 3. ESTILOS DEL EXAMEN --- */
-/* (Estilos base de java.css + los nuevos de quizJava) */
 .hero {
     display: flex;
     flex-direction: column;
@@ -128,7 +125,8 @@ nav a:hover {
 /* Estilos para el header del examen (timer, nombre, etc.) */
 #quiz-header {
     text-align: left;
-    background-color: #1f1f3d; /* Estilo de tarjeta */
+    background-color: #1f1f3d;
+    /* Estilo de tarjeta */
     padding: 25px;
     border-radius: 10px;
     border: 1px solid #2a2a4a;
@@ -137,7 +135,8 @@ nav a:hover {
 
 #quiz-header h1 {
     margin-top: 0;
-    color: #8a2be2; /* Color de acento */
+    color: #8a2be2;
+    /* Color de acento */
 }
 
 .exam-details {
@@ -145,11 +144,10 @@ nav a:hover {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px;
-    color: #cfcfe6; /* Color de texto suave */
+    color: #cfcfe6;
+    /* Color de texto suave */
     font-size: 0.95em;
 }
-
-/* SE HAN ELIMINADO LOS ESTILOS .timer y .timer.warning */
 
 /* Estilos para las tarjetas de preguntas (de java.css) */
 .card {
@@ -213,12 +211,18 @@ nav a:hover {
     margin-bottom: 20px;
 }
 
-.ok { color: #00c2a8; font-weight: bold; }
-.bad { color: #ff6b6b; font-weight: bold; }
+.ok {
+    color: #00c2a8;
+    font-weight: bold;
+}
+
+.bad {
+    color: #ff6b6b;
+    font-weight: bold;
+}
 
 
 /* --- 4. FOOTER --- */
-/* (Tomado de tus otros CSS) */
 footer {
     background-color: rgba(0, 0, 0, 0.3);
     padding: 30px 20px;

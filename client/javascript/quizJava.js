@@ -40,7 +40,7 @@ function updateUILoggedOut() {
 // --- Función para hacer logout ---
 async function logout() {
     try {
-        // CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR
+        // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
         const res = await fetch("http://localhost:3000/api/logout", {
             method: "POST",
             headers: {
@@ -57,7 +57,7 @@ async function logout() {
     }
 }
 
-
+// --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
 const API_URL = "http://192.168.1.71:3000/api/questions";
 const CERTIFICATION_NAME = "Certificación Java Professional"; //
 
@@ -73,7 +73,7 @@ let currentQuestions = [];
 // --- Función 1: Iniciar el Examen (al cargar la página) ---
 async function loadExam() {
     const token = localStorage.getItem('token');
-    
+
     // 1. Mostrar datos de la cabecera del examen
     document.getElementById("certification-title").innerText = `Examen: ${CERTIFICATION_NAME}`;
     document.getElementById("user-name-display").innerText = localStorage.getItem('userName') || "N/A";
@@ -155,9 +155,9 @@ async function submitQuiz(e) {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
-            body: JSON.stringify({ 
-                attemptId: currentAttemptId, 
-                answers: answers 
+            body: JSON.stringify({
+                attemptId: currentAttemptId,
+                answers: answers
             })
         });
 
@@ -184,8 +184,8 @@ function renderResult(data) {
     // Ocultar el formulario
     quizForm.style.display = "none";
 
-    const resultTitle = data.passed 
-        ? "¡Felicidades, has APROBADO!" 
+    const resultTitle = data.passed
+        ? "¡Felicidades, has APROBADO!"
         : "Resultado: NO APROBADO";
 
     resultado.innerHTML = `

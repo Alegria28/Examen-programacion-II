@@ -11,7 +11,7 @@ form.addEventListener("submit", async (e) => {
 
     // Enviar los datos al servidor usando fetch + async/await
     try {
-        // CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR
+        // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
         const res = await fetch("http://localhost:3000/api/login", {
             method: "POST",
             headers: {
