@@ -2,31 +2,37 @@
   {
     "cuenta": "alegria",
     "contrasena": "alegriaProgra",
-    "nombre": "Alegria Vela"
+    "nombre": "Alegria Vela",
+    "cursoPagado": "false"
   },
   {
     "cuenta": "darely",
     "contrasena": "darelyProgra",
-    "nombre": "Darely Quezada"
+    "nombre": "Darely Quezada",
+    "cursoPagado": "false"
   },
   {
     "cuenta": "oscar",
     "contrasena": "oscarProgra",
-    "nombre": "Oscar Guillen"
+    "nombre": "Oscar Guillen",
+    "cursoPagado": "false"
   },
   {
     "cuenta": "luis",
     "contrasena": "progra1",
-    "nombre": "Luis Vela"
+    "nombre": "Luis Vela",
+    "cursoPagado": "false"
   },
   {
     "cuenta": "andrea",
     "contrasena": "progra2",
-    "nombre": "Andrea Lopez"
+    "nombre": "Andrea Lopez",
+    "cursoPagado": "false"
   },
   {
     "cuenta": "prof_uaa",
     "contrasena": "progra3",
-    "nombre": "Guillermo Lopez"
+    "nombre": "Guillermo Lopez",
+    "cursoPagado": "false"
   }
 ]

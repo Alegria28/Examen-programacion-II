@@ -85,14 +85,9 @@
                 <div class="price">$99 <span class="price-period">USD</span></div>
                 <p>Pago único - Acceso de por vida al certificado</p>
 
-                <div id="payment-status">
-                    <button id="pay-btn" class="btn btn-primary">Realizar Pago</button>
-                </div>
-
-                <div id="exam-access" class="hidden">
+                <div id="exam-access">
                     <div class="paid-indicator">Esta certificación no está disponible por el momento</div>
                     <p>Disponible a partir del 10 de octubre de 2025</p>
-                    <button id="start-exam-btn" class="btn btn-success">Comenzar Examen</button>
                 </div>
             </div>
         </section>
@@ -109,16 +104,7 @@
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../javascript/java.js"></script>
-    <script>
-        document.getElementById('pay-btn').addEventListener('click', function () {
-            // Simular el proceso de pago
-            setTimeout(function () {
-                document.getElementById('payment-status').classList.add('hidden');
-                document.getElementById('exam-access').classList.remove('hidden');
-            }, 1000); // Simula un retraso de 1 segundo para el pago
-        });
-    </script>
+    <script src="../javascript/cmasmas.js"></script>
 </body>
 
 </html>

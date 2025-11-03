@@ -125,7 +125,16 @@ document.getElementById('pay-btn').addEventListener('click', function () {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        alert('Debes iniciar sesión para realizar el pago.');
+        Swal.fire({
+            title: 'Acceso Denegado',
+            text: 'Debes iniciar sesión para realizar el pago.',
+            icon: 'warning',
+            confirmButtonText: 'Iniciar Sesión'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = './login.html';
+            }
+        });
         return;
     }
 
@@ -141,7 +150,16 @@ document.getElementById('start-exam-btn').addEventListener('click', function () 
     const token = localStorage.getItem('token');
 
     if (!token) {
-        alert('Debes iniciar sesión para realizar el pago.');
+        Swal.fire({
+            title: 'Acceso Denegado',
+            text: 'Debes iniciar sesión para comenzar el examen.',
+            icon: 'warning',
+            confirmButtonText: 'Iniciar Sesión'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = './login.html';
+            }
+        });
         return;
     }
 
