@@ -1,26 +1,32 @@
 [
   {
     "cuenta": "alegria",
-    "contrasena": "alegriaProgra"
+    "contrasena": "alegriaProgra",
+    "nombre": "Alegria Vela"
   },
   {
     "cuenta": "darely",
-    "contrasena": "darelyProgra"
+    "contrasena": "darelyProgra",
+    "nombre": "Darely Quezada"
   },
   {
     "cuenta": "oscar",
-    "contrasena": "oscarProgra"
+    "contrasena": "oscarProgra",
+    "nombre": "Oscar Guillen"
   },
   {
     "cuenta": "luis",
-    "contrasena": "progra1"
+    "contrasena": "progra1",
+    "nombre": "Luis Vela"
   },
   {
     "cuenta": "andrea",
-    "contrasena": "progra2"
+    "contrasena": "progra2",
+    "nombre": "Andrea Lopez"
   },
   {
     "cuenta": "prof_uaa",
-    "contrasena": "progra3"
+    "contrasena": "progra3",
+    "nombre": "Guillermo Lopez"
   }
 ]
