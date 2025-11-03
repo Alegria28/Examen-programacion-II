@@ -1,3 +1,5 @@
+import { API_BASE_URL } from './config.js';
+
 // --- Función para verificar si hay sesión activa ---
 function checkSession() {
     const userName = localStorage.getItem('userName');
@@ -35,8 +37,7 @@ function updateUILoggedOut() {
 // --- Función para hacer logout ---
 async function logout() {
     try {
-        // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
-        const res = await fetch("http://localhost:3000/api/logout", {
+        const res = await fetch(`${API_BASE_URL}/api/logout`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem('token')}`
@@ -86,7 +87,7 @@ async function verificarEstadoPago() {
     }
 
     try {
-        const res = await fetch("http://localhost:3000/api/usuario/obtenerUsuario", {
+        const res = await fetch(`${API_BASE_URL}/api/usuario/obtenerUsuario`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -156,8 +157,7 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
 
     // Obtenemos los datos de la cuenta 
     try {
-        // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
-        const res = await fetch("http://localhost:3000/api/usuario/obtenerUsuario", {
+        const res = await fetch(`${API_BASE_URL}/api/usuario/obtenerUsuario`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -215,8 +215,7 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
                 await new Promise(resolve => setTimeout(resolve, 800));
 
                 try {
-                    // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
-                    const resPago = await fetch("http://localhost:3000/api/usuario/realizarPago", {
+                    const resPago = await fetch(`${API_BASE_URL}/api/usuario/realizarPago`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

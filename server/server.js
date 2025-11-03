@@ -7,12 +7,13 @@ const authRoutes = require("./routes/auth.routes");
 const questionsRoutes = require("./routes/questions.routes");
 const certificadoRoutes = require("./routes/certificado.routes");
 const userRoutes = require("./routes/user.routes")
+const { IP_SERVIDOR } = require("./config");
 
 // Middlewares mínimos
 app.use(express.json());
 
-// --- Modificar respectivamente con la ip actual de la maquina servidor ---
-const ipServidor = "127.0.0.1";
+// --- IP del servidor en la red LAN (importada desde config.js) ---
+const ipServidor = IP_SERVIDOR;
 
 const ALLOWED_ORIGINS = [
     'http://localhost:5500',
@@ -23,7 +24,7 @@ const ALLOWED_ORIGINS = [
     `http://${ipServidor}:5500`,
     `http://${ipServidor}:3000`,
     // IP's permitidas al servidor
-    "http://10.0.0.15:5500", // Alegria
+    "http://10.13.82.192:5500", // Alegria
     "http://192.168.1.71:5500", // Oscar
     "http://192.168.100.7:5500" // Darely
 ];
@@ -56,5 +57,5 @@ app.get("/health", (_req, res) => res.json({ ok: true }));
 
 // Start the server and listen for incoming requests
 app.listen(port, ipServidor, () => {
-    console.log(`Servidor corriendo en: http://${ipServidor}:${port}`);
+    console.log(`✓ Servidor corriendo exitosamente`);
 });

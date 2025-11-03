@@ -1,3 +1,5 @@
+import { API_BASE_URL } from './config.js';
+
 // --- Función para verificar si hay sesión activa ---
 function checkSession() {
     const userName = localStorage.getItem('userName');
@@ -35,8 +37,7 @@ function updateUILoggedOut() {
 // --- Función para hacer logout ---
 async function logout() {
     try {
-        // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
-        const res = await fetch("http://localhost:3000/api/logout", {
+        const res = await fetch(`${API_BASE_URL}/api/logout`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem('token')}`

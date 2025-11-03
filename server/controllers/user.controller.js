@@ -1,5 +1,5 @@
 // Importa la versión de promesas del módulo 'fs' para leer y modificar el archivo .json
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 
 // Función controladora para obtener el perfil del usuario autenticado

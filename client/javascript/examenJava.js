@@ -1,5 +1,6 @@
-// --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
-const API_CERTIFICADO = "http://localhost:3000/api/certificados";
+import { API_BASE_URL } from './config.js';
+
+const API_CERTIFICADO = `${API_BASE_URL}/api/certificados`;
 const btnPDF = document.getElementById("btnPDF");
 
 btnPDF.addEventListener("click", async () => {

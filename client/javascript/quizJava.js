@@ -1,3 +1,5 @@
+import { API_BASE_URL } from './config.js';
+
 // --- Función para verificar si hay sesión activa ---
 function checkSession() {
     const userName = localStorage.getItem('userName');
@@ -40,8 +42,7 @@ function updateUILoggedOut() {
 // --- Función para hacer logout ---
 async function logout() {
     try {
-        // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
-        const res = await fetch("http://localhost:3000/api/logout", {
+        const res = await fetch(`${API_BASE_URL}/api/logout`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem('token')}`
@@ -57,8 +58,7 @@ async function logout() {
     }
 }
 
-// --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
-const API_URL = "http://192.168.1.71:3000/api/questions";
+const API_URL = `${API_BASE_URL}/api/questions`;
 const CERTIFICATION_NAME = "Certificación Java Professional"; //
 
 // Elementos del DOM

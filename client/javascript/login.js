@@ -1,3 +1,5 @@
+import { API_BASE_URL } from './config.js';
+
 // Capturamos el formulario
 const form = document.getElementById("formLogin");
 
@@ -11,8 +13,7 @@ form.addEventListener("submit", async (e) => {
 
     // Enviar los datos al servidor usando fetch + async/await
     try {
-        // --- CAMBIAR LA IP SEGÚN LA IP DEL SERVIDOR ---
-        const res = await fetch("http://localhost:3000/api/login", {
+        const res = await fetch(`${API_BASE_URL}/api/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
