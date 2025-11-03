@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen: Java Professional | Lexiscode</title>
+    <link rel="icon" href="../img/marca/Favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/quizJava.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="../../index.html" class="logo">
+                <img src="../img/marca/Favicon.ico" alt="Lexiscode logo">
+            </a>
+            <ul>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="./certifications.html">Certificaciones</a></li>
+                <li><a href="./contact.html">Contacto</a></li>
+                <li><a href="./about.html">Nosotros</a></li>
+                <li>
+                    <div id="cuenta">
+                        </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="quiz-container">
+                <div id="quiz-header" class="card">
+                    <h1 id="certification-title">Cargando examen...</h1>
+                    <div class="exam-details">
+                        <p><strong>Estudiante:</strong> <span id="user-name-display"></span></p>
+                        <p><strong>Fecha:</strong> <span id="exam-date"></span></p>
+                        </div>
+                </div>
+
+                <form id="quizForm" style="display:none;">
+                    <div id="listaPreguntas">
+                        </div>
+                    <button type="submit" class="btn-primary" id="submit-btn">Terminar y Enviar Examen</button>
+                </form>
+
+                <div id="resultado">
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Lexiscode. Todos los derechos reservados.</p>
+            <ul class="social-media">
+                <li><a href="https://www.instagram.com/lexiscode_academy/">Instagram</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../javascript/quizJava.js"></script>
+</body>
+
+</html>

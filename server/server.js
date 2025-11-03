@@ -4,12 +4,13 @@ const cors = require('cors');
 const port = 3000; // Definimos puerto por el cual va a escuchar nuestro servidor
 
 const authRoutes = require("./routes/auth.routes");
+const questionsRoutes = require("./routes/questions.routes");
 
 // Middlewares mínimos
 app.use(express.json());
 
 // --- Modificar respectivamente con la ip actual de la maquina servidor ---
-const ipServidor = "10.0.0.19";
+const ipServidor = "192.168.1.71";
 
 const ALLOWED_ORIGINS = [
     'http://localhost:5500',
@@ -18,7 +19,7 @@ const ALLOWED_ORIGINS = [
     `http://${ipServidor}:5500`,
     // IP's permitidas al servidor
     "http://10.0.0.15:5500", // Alegria
-    "http://0.0.0.0:5500", // Oscar
+    "http://192.168.1.71:5500", // Oscar
     "http://0.0.0.0:5500" // Darely
 ];
 
@@ -41,6 +42,7 @@ app.use(cors({
 
 // Montar rutas bajo /api
 app.use("/api", authRoutes);
+app.use("/api/questions", questionsRoutes);
 
 // (Opcional) Ruta de salud
 app.get("/health", (_req, res) => res.json({ ok: true }));

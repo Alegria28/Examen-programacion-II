@@ -1,0 +1,256 @@
+/* --- 1. LAYOUT BÁSICO Y STICKY FOOTER --- */
+/* (Tomado de tus otros CSS para mantener la armonía) */
+/* */
+
+body {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    font-family: sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* Esta línea es la clave para empujar el footer hacia abajo */
+}
+
+/* --- 2. HEADER Y NAVEGACIÓN --- */
+/* (Tomado de tus otros CSS) */
+header {
+    padding: 20px 50px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #2a2a4a;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 55px;
+    object-fit: contain;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #8a2be2;
+}
+
+/* Estilos del Dropdown (para el login/logout) */
+.dropdown {
+    position: relative;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 8px 15px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #1f1f3d;
+    min-width: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 0;
+    border-radius: 8px;
+    z-index: 1;
+    border: 1px solid #8a2be2;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: #ffffff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+}
+
+.dropdown-content a:hover {
+    background-color: #8a2be2;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --- 3. ESTILOS DEL EXAMEN --- */
+/* (Estilos base de java.css + los nuevos de quizJava) */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 50px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.quiz-container {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+/* Estilos para el header del examen (timer, nombre, etc.) */
+#quiz-header {
+    text-align: left;
+    background-color: #1f1f3d; /* Estilo de tarjeta */
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #2a2a4a;
+    margin-bottom: 20px;
+}
+
+#quiz-header h1 {
+    margin-top: 0;
+    color: #8a2be2; /* Color de acento */
+}
+
+.exam-details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: #cfcfe6; /* Color de texto suave */
+    font-size: 0.95em;
+}
+
+/* SE HAN ELIMINADO LOS ESTILOS .timer y .timer.warning */
+
+/* Estilos para las tarjetas de preguntas (de java.css) */
+.card {
+    background-color: #1f1f3d;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #2a2a4a;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.card p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.card label {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.card label:hover {
+    background-color: rgba(138, 43, 226, 0.1);
+}
+
+.card input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Estilos para el botón de envío (de java.css) */
+.btn-primary {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: #8a2be2;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px 0;
+}
+
+.btn-primary:hover {
+    background-color: #6b22b8;
+}
+
+/* Estilos para los resultados (de java.css) */
+#resultado {
+    margin-top: 30px;
+    text-align: left;
+}
+
+#resultado h2 {
+    color: #8a2be2;
+    margin-bottom: 20px;
+}
+
+.ok { color: #00c2a8; font-weight: bold; }
+.bad { color: #ff6b6b; font-weight: bold; }
+
+
+/* --- 4. FOOTER --- */
+/* (Tomado de tus otros CSS) */
+footer {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 30px 20px;
+    text-align: center;
+    border-top: 1px solid #2a2a4a;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin: 0 0 10px 0;
+    color: #cfcfe6;
+}
+
+.social-media {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.social-media a {
+    color: #8a2be2;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social-media a:hover {
+    color: #a855f7;
+}

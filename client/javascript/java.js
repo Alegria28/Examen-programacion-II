@@ -75,4 +75,46 @@ async function logout() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const payBtn = document.getElementById('pay-btn');
+    const startExamBtn = document.getElementById('start-exam-btn');
+
+    if (payBtn) {
+        payBtn.addEventListener('click', function () {
+            Swal.fire({
+                title: 'Procesando pago...',
+                timer: 1500,
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+            }).then(() => {
+                document.getElementById('payment-status').classList.add('hidden');
+                document.getElementById('exam-access').classList.remove('hidden');
+            });
+        });
+    }
+
+    if (startExamBtn) {
+        startExamBtn.addEventListener('click', function () {
+            const token = localStorage.getItem('token');
+        
+            if (!token) {
+                Swal.fire({
+                    title: 'Acceso Denegado',
+                    text: 'Debes iniciar sesión para poder comenzar el examen.',
+                    icon: 'warning',
+                    confirmButtonText: 'Iniciar Sesión'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = './login.html';
+                    }
+                });
+                return;
+            }
+            // Si hay token, redirigir al usuario a la página del examen
+            window.location.href = './quizJava.html';
+        });
+    }
+});
 checkSession();

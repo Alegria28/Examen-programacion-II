@@ -1,25 +1,32 @@
-// Maneja dos rutas principales:
-// - **`POST /api/questions/start`** → envía las preguntas (sin mostrar las respuestas correctas).
-// - **`POST /api/questions/submit`** → recibe las respuestas del usuario, las evalúa y devuelve el resultado.
+const QUESTIONS = require("../data/questions"); // Banco de 16 preguntas
 
-const QUESTIONS = require("../data/questions");
+let currentExamQuestions = [];
 
 // --- 1) Enviar preguntas al frontend ---  
 const startQuiz = (req, res) => {
     console.log("Acceso al /api/questions/start");
-    // Crear una copia segura del banco y devolver 8 preguntas sin la clave 'correct'
+    
+    // 1. Baraja y toma 8 preguntas (tu lógica está bien)
     const pool = Array.isArray(QUESTIONS) ? QUESTIONS.slice() : [];
-
     const shuffled = pool.sort(() => Math.random() - 0.5).slice(0, 8);
 
-    const publicQuestions = shuffled.map((q, index) => {
-        // Copiamos las opciones antes de mezclarlas para no mutar el original
+    // 2. Prepara las 8 preguntas para el frontend
+    const publicQuestions = [];
+    
+    currentExamQuestions = [];
+
+    shuffled.forEach((q, index) => {
+        // Barajamos las opciones
         const options = Array.isArray(q.options) ? [...q.options].sort(() => Math.random() - 0.5) : [];
-        return {
-            // SOLO QUITAR ESTA LÍNEA: id: q.id,
+        
+        publicQuestions.push({
+            id: q.id, 
             text: `${index + 1}. ${q.text}`,
             options
-        };
+        });
+
+        // Guardamos la información completa de estas 8 preguntas en nuestra variable
+        currentExamQuestions.push(q);
     });
 
     res.status(200).json({
@@ -31,31 +38,22 @@ const startQuiz = (req, res) => {
 // --- 2) Recibir y evaluar respuestas ---
 const submitAnswers = (req, res) => {
     console.log("Acceso al /api/questions/submit");
-    console.log("Respuestas recibidas:", JSON.stringify(req.body, null, 2));
-
-    // 1 Toma las respuestas enviadas por el usuario
-    // Si req.body.answers es un arreglo → devuelve true
-    // El servidor no truena, simplemente no califica nada y responde con score 0.
     const userAnswers = Array.isArray(req.body.answers) ? req.body.answers : [];
 
-    // 2 Inicializa puntaje y arreglo de detalles
     let score = 0;
     const details = [];
-
-    // 3 Recorre todas las preguntas del servidor
-    for (const q of QUESTIONS) {
-        // 3.1) Busca la respuesta enviada para esta pregunta
+    
+    for (const q of currentExamQuestions) {
+        // 3.1) Busca la respuesta del usuario para esta pregunta
         const user = userAnswers.find(a => a.id === q.id);
 
-        // 3.2) Determina si es correcta
-        //isCorrect será verdadero solo si existe user y además la respuesta del usuario es igual a la correcta
+        // 3.2) Compara con la respuesta correcta
         const isCorrect = !!user && user.answer === q.correct;
-
-        // 3.3) Suma al puntaje si acierta
         if (isCorrect) score++;
 
-        // 3.4) Agrega la información detallada de la pregunta
+        // 3.4) Agrega detalles
         details.push({
+            id: q.id,
             text: q.text,
             yourAnswer: user ? user.answer : null,
             correctAnswer: q.correct,
@@ -63,11 +61,17 @@ const submitAnswers = (req, res) => {
         });
     }
 
-    // 4 Envía el resultado al cliente
+    // 4. Determina si aprobó
+    const total = currentExamQuestions.length; 
+    const scorePercent = (score / total) * 100;
+    const passed = scorePercent >= 80; 
+
+    // 5. Envía el resultado
     return res.status(200).json({
         message: "Respuestas evaluadas.",
         score,
-        total: QUESTIONS.length,
+        total,
+        passed,
         details
     });
 };
