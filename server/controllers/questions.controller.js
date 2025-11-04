@@ -1,37 +1,32 @@
 const QUESTIONS = require("../data/questions"); // Banco de 16 preguntas
 
-// ¡Ya no necesitamos una variable global!
-// let currentExamQuestions = []; // <-- ELIMINADA
-
 // --- 1) Enviar preguntas al frontend ---  
 const startQuiz = (req, res) => {
-    
+
     // 1. Baraja y toma 8 preguntas
     const pool = Array.isArray(QUESTIONS) ? QUESTIONS.slice() : [];
     const shuffled = pool.sort(() => Math.random() - 0.5).slice(0, 8);
 
     // 2. Prepara las 8 preguntas para el frontend (sin respuestas correctas)
     const publicQuestions = [];
-    
+
     shuffled.forEach((q, index) => {
         // Barajamos las opciones
         const options = Array.isArray(q.options) ? [...q.options].sort(() => Math.random() - 0.5) : [];
-        
+
         publicQuestions.push({
-            id: q.id, 
+            id: q.id,
             text: `${index + 1}. ${q.text}`,
             options
         });
-        
-        // Ya no guardamos nada en el servidor
-        // currentExamQuestions.push(q); // <-- ELIMINADO
+
     });
 
     res.status(200).json({
         message: "Preguntas listas. ¡Éxito!",
         questions: publicQuestions,
         // Agregamos el dummy attemptId para que el frontend no falle
-        attemptId: "temp-id-123456" 
+        attemptId: "temp-id-123456"
     });
 };
 
@@ -44,11 +39,11 @@ const submitAnswers = (req, res) => {
     const details = [];
     // El total ya no se basa en una variable global, 
     // sino en cuántas respuestas recibimos.
-    const total = userAnswers.length; 
+    const total = userAnswers.length;
 
     // 2. Itera sobre las respuestas del usuario
     for (const userAnswer of userAnswers) {
-        
+
         // 3. Busca la pregunta completa (con la respuesta correcta) 
         // en nuestro banco de preguntas maestro.
         const q = QUESTIONS.find(q_master => q_master.id === userAnswer.id);
@@ -72,7 +67,7 @@ const submitAnswers = (req, res) => {
 
     // 6. Determina si aprobó
     const scorePercent = (total > 0) ? (score / total) * 100 : 0;
-    const passed = scorePercent >= 80; 
+    const passed = scorePercent >= 80;
 
     // 7. Envía el resultado
     return res.status(200).json({
