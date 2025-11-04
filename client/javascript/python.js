@@ -107,3 +107,12 @@ async function logout() {
 
 // Verificar sesión al cargar la página
 checkSession();
+
+// Boton deshabilitado
+document.getElementById('pay-btn')?.addEventListener('click', async () => {
+    // Desaparece boton pagar
+    document.getElementById('pay-btn').classList.add('hidden');
+    
+    // Aparece seccion comenzar examen
+    document.getElementById('exam-access').classList.remove('hidden');   
+});
