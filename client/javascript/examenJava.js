@@ -30,19 +30,6 @@ btnPDF.addEventListener("click", async () => {
                         "Authorization": `Bearer ${token}`
                     }
                 });
-                /*
-                if (response.ok) {
-                    const blob = await response.blob(); // Obtener el PDF como blob
-                    const url = window.URL.createObjectURL(blob); // Crear una URL para el blob
-                    const a = document.createElement('a'); // Crear un enlace temporal
-                    a.href = url; // Asignar la URL del blob
-                    a.download = `certificado.pdf`; // Nombre fijo
-                    a.click(); // Simular clic para descargar
-                    window.URL.revokeObjectURL(url); // Liberar la URL del blob
-                } else {
-                    const errorData = await response.json();
-                    alert(`Error: ${errorData.error}`);
-                }*/
                 if (response.ok) {
                     const blob = await response.blob();
 

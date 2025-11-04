@@ -127,10 +127,20 @@ async function verificarEstadoPago() {
 
         const data = await res.json();
 
-        if (res.ok && data.usuario && data.usuario.cursoPagado === "true") {
+        if (res.ok && data.usuario) {
             // Si ya pagó, mostrar el acceso al examen
-            document.getElementById('payment-status').classList.add('hidden');
-            document.getElementById('exam-access').classList.remove('hidden');
+            if (data.usuario.cursoPagado === "true") {
+                document.getElementById('payment-status').classList.add('hidden');
+                document.getElementById('exam-access').classList.remove('hidden');
+
+                // Si ya realizó el examen, modificar el botón
+                if (data.usuario.cursoRealizado === "true") {
+                    const examBtn = document.getElementById('start-exam-btn');
+                    examBtn.textContent = 'Examen ya realizado';
+                    examBtn.style.backgroundColor = '#6c757d';
+                    examBtn.style.cursor = 'not-allowed';
+                }
+            }
         }
     } catch (error) {
 
@@ -310,7 +320,7 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
 });
 
 // En caso de que se le haga click al botón de realizar el examen, obtenemos el botón y le agregamos un listener
-document.getElementById('start-exam-btn').addEventListener('click', function () {
+document.getElementById('start-exam-btn').addEventListener('click', async function () {
     const token = localStorage.getItem('token');
 
     if (!token) {
@@ -327,8 +337,85 @@ document.getElementById('start-exam-btn').addEventListener('click', function () 
         return;
     }
 
-    // Si hay token, redirigir al usuario a la página del examen
-    window.location.href = './quizJava.html';
+    const userName = localStorage.getItem('userName');
+
+    // Verificar si el usuario ya realizó el examen
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/usuario/obtenerUsuario`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                cuenta: userName
+            })
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.usuario) {
+            // Si ya realizó el examen, mostrar alerta y no permitir continuar
+            if (data.usuario.cursoRealizado === "true") {
+                Swal.fire({
+                    title: 'Examen ya realizado',
+                    text: 'Ya has realizado este examen anteriormente. No puedes volver a realizarlo.',
+                    icon: 'info',
+                    confirmButtonText: 'Entendido'
+                });
+                return;
+            }
+
+            // Si no lo ha realizado, marcar como realizado y redirigir
+            Swal.fire({
+                title: 'Iniciando examen...',
+                text: 'Por favor espera',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            const resMarcar = await fetch(`${API_BASE_URL}/api/usuario/marcarExamenRealizado`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    cuenta: userName
+                })
+            });
+
+            const dataMarcar = await resMarcar.json();
+
+            if (resMarcar.ok) {
+                // Redirigir al usuario a la página del examen
+                window.location.href = './quizJava.html';
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: dataMarcar.error || 'No se pudo iniciar el examen',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        } else {
+            Swal.fire({
+                title: 'Error',
+                text: data.error || 'No se pudo verificar el estado del usuario',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    } catch (error) {
+        console.error('Error al verificar estado del examen:', error);
+        Swal.fire({
+            title: 'Error de Conexión',
+            text: 'No se pudo conectar con el servidor',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
 });
 
 checkSession();

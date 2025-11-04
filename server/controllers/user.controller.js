@@ -118,3 +118,75 @@ exports.realizarPago = async (req, res) => {
         });
     }
 };
+
+exports.marcarExamenRealizado = async (req, res) => {
+    try {
+        const cuentaUser = req.body.cuenta;
+
+        if (!cuentaUser) {
+            return res.status(400).json({
+                error: 'No se proporcionó el nombre de cuenta'
+            });
+        }
+
+        // Ruta al archivo JSON
+        const usersPath = path.join(__dirname, '../models/users.json');
+
+        // Leer el archivo
+        const contenidoArchivo = await fs.readFile(usersPath, 'utf-8');
+        const users = JSON.parse(contenidoArchivo);
+
+        // Buscar el índice del usuario
+        const userIndex = users.findIndex(u => u.cuenta === cuentaUser);
+
+        if (userIndex === -1) {
+            return res.status(404).json({
+                error: 'Usuario no encontrado'
+            });
+        }
+
+        // Verificar si ya realizó el examen
+        if (users[userIndex].cursoRealizado === "true") {
+            return res.status(400).json({
+                error: 'El usuario ya ha realizado el examen',
+                usuario: users[userIndex]
+            });
+        }
+
+        // Marcar el examen como realizado
+        users[userIndex].cursoRealizado = "true";
+
+        // Guardar los cambios en el archivo
+        await fs.writeFile(usersPath, JSON.stringify(users, null, 2), 'utf-8');
+
+        return res.status(200).json({
+            mensaje: 'Examen marcado como realizado exitosamente',
+            usuario: {
+                id: users[userIndex].id,
+                cuenta: users[userIndex].cuenta,
+                nombre: users[userIndex].nombre,
+                cursoPagado: users[userIndex].cursoPagado,
+                cursoRealizado: users[userIndex].cursoRealizado
+            }
+        });
+
+    } catch (error) {
+        console.error('Error al marcar examen como realizado:', error);
+
+        if (error.code === 'ENOENT') {
+            return res.status(500).json({
+                error: 'No se pudo encontrar el archivo de usuarios en el servidor'
+            });
+        }
+
+        if (error instanceof SyntaxError) {
+            return res.status(500).json({
+                error: 'Error al procesar los datos de usuarios. El archivo puede estar corrupto'
+            });
+        }
+
+        return res.status(500).json({
+            error: 'Error interno del servidor al marcar el examen'
+        });
+    }
+};
