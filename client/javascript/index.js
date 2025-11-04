@@ -18,10 +18,19 @@ function updateUILoggedIn(userName) {
     contenidoDiv.innerHTML = `
     <div class="dropdown">${userName}
         <div class="dropdown-content">
-            <a onclick="logout()">Salir</a>
+            <a href="#" id="logout-btn">Salir</a>
         </div>
     </div>
     `;
+    
+    // Agregar event listener al botón de logout
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+    }
 }
 
 // --- Actualizar UI cuando NO hay sesión ---
