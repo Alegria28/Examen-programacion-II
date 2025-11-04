@@ -248,6 +248,16 @@ function renderResult(data) {
     if (data.passed === true) {
         btnPDF.hidden = false;
         btnPDF.style.display = 'inline-block';
+
+        // Mostrar SweetAlert
+        Swal.fire({
+            title: '¡Has aprobado!',
+            text: 'Descarga tu certificado en PDF.',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 3000, // 3 segundos
+            timerProgressBar: true
+        });
     }
 }
 
