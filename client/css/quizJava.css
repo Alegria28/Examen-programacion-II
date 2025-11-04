@@ -275,103 +275,329 @@ nav a:hover {
     text-align: center;
 }
 
-/* Estilos para el header del examen (timer, nombre, etc.) */
+/* Estilos para el header del examen - Mejorado y Moderno */
 #quiz-header {
     text-align: left;
-    background-color: #1f1f3d;
-    /* Estilo de tarjeta */
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid #2a2a4a;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, #1f1f3d 0%, #16213e 100%);
+    padding: 30px;
+    border-radius: 16px;
+    border: 2px solid rgba(138, 43, 226, 0.3);
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+#quiz-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8a2be2, #a855f7, #8a2be2);
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 #quiz-header h1 {
     margin-top: 0;
-    color: #8a2be2;
-    /* Color de acento */
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 2em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8a2be2, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.5px;
 }
 
 .exam-details {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px;
-    color: #cfcfe6;
-    /* Color de texto suave */
-    font-size: 0.95em;
+    gap: 15px;
+    color: #e0e0e0;
+    font-size: 1em;
+    padding-top: 15px;
+    border-top: 1px solid rgba(138, 43, 226, 0.2);
 }
 
-/* Estilos para las tarjetas de preguntas (de java.css) */
+.exam-details p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.exam-details strong {
+    color: #a855f7;
+    font-weight: 600;
+}
+
+/* Estilos para las tarjetas de preguntas */
 .card {
-    background-color: #1f1f3d;
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid #2a2a4a;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, #1f1f3d 0%, #16213e 100%);
+    padding: 30px;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    margin-bottom: 25px;
     text-align: left;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(135deg, #8a2be2, #a855f7, #8a2be2);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(138, 43, 226, 0.3);
+}
+
+.card:hover::before {
+    opacity: 1;
 }
 
 .card p {
-    margin-bottom: 15px;
-    font-size: 1.1em;
+    margin-bottom: 20px;
+    font-size: 1.15em;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 15px;
+}
+
+.card p::before {
+    position: absolute;
+    left: -5px;
+    top: 0;
+    font-size: 1.2em;
+    filter: grayscale(0);
 }
 
 .card label {
-    display: block;
-    padding: 10px;
-    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    padding: 15px 18px;
+    margin: 10px 0;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.2s;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(138, 43, 226, 0.2);
+    position: relative;
+    font-size: 1.05em;
+    font-weight: 500;
+    color: #e0e0e0;
+    backdrop-filter: blur(10px);
+}
+
+.card label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #8a2be2, #a855f7);
+    border-radius: 12px 0 0 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .card label:hover {
-    background-color: rgba(138, 43, 226, 0.1);
+    background: linear-gradient(90deg, rgba(138, 43, 226, 0.15), rgba(168, 85, 247, 0.1));
+    border-color: rgba(138, 43, 226, 0.5);
+    transform: translateX(8px);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.2);
+}
+
+.card label:hover::before {
+    opacity: 1;
 }
 
 .card input[type="radio"] {
-    margin-right: 10px;
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    accent-color: #8a2be2;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
 }
 
-/* Estilos para el botón de envío (de java.css) */
+.card input[type="radio"]:hover {
+    transform: scale(1.1);
+}
+
+.card input[type="radio"]:checked + span {
+    color: #a855f7;
+    font-weight: 600;
+}
+
+.card label:has(input[type="radio"]:checked) {
+    background: linear-gradient(90deg, rgba(138, 43, 226, 0.25), rgba(168, 85, 247, 0.15));
+    border-color: #8a2be2;
+    box-shadow: 0 4px 16px rgba(138, 43, 226, 0.3);
+}
+
+.card label:has(input[type="radio"]:checked)::before {
+    opacity: 1;
+    width: 5px;
+}
+
+/* Animación de entrada para las tarjetas */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(6) { animation-delay: 0.6s; }
+.card:nth-child(7) { animation-delay: 0.7s; }
+.card:nth-child(8) { animation-delay: 0.8s; }
+.card:nth-child(9) { animation-delay: 0.9s; }
+.card:nth-child(10) { animation-delay: 1s; }
+
+/* Estilos para el botón de envío */
 .btn-primary {
     display: inline-block;
-    padding: 15px 40px;
-    background-color: #8a2be2;
+    padding: 18px 50px;
+    background: linear-gradient(135deg, #8a2be2, #6b22b8);
     color: #ffffff;
     border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1.1em;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.15em;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 10px 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 25px 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(138, 43, 226, 0.4);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-primary:hover {
-    background-color: #6b22b8;
+    background: linear-gradient(135deg, #a855f7, #8a2be2);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(138, 43, 226, 0.6);
 }
 
-/* Estilos para los resultados (de java.css) */
+.btn-primary:active {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(138, 43, 226, 0.4);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Estilos para los resultados */
 #resultado {
-    margin-top: 30px;
+    margin-top: 40px;
     text-align: left;
 }
 
 #resultado h2 {
-    color: #8a2be2;
-    margin-bottom: 20px;
+    color: #ffffff;
+    margin-bottom: 25px;
+    font-size: 2em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8a2be2, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
 }
 
 .ok {
-    color: #00c2a8;
-    font-weight: bold;
+    color: #00ff9d;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ok::before {
+    content: '✓';
+    font-size: 1.2em;
 }
 
 .bad {
     color: #ff6b6b;
-    font-weight: bold;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.bad::before {
+    content: '✗';
+    font-size: 1.2em;
 }
 
 
