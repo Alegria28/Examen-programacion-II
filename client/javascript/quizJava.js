@@ -149,7 +149,7 @@ function renderQuestions(questions) {
         const div = document.createElement("div");
         div.className = "card"; // Usamos el estilo .card
         div.innerHTML = `
-            <p class="qtext"><strong>${index + 1}.</strong> ${q.text}</p>
+            <p class="qtext">${q.text}</p>
             <div class="options">
                 ${q.options.map(opt => `
                     <label class="option">
