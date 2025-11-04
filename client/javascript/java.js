@@ -35,10 +35,10 @@ function updateUILoggedIn(userName) {
         </div>
     </div>
     `;
-    
+
     // Inicializar el dropdown con funcionalidad de click
     initializeDropdown();
-    
+
     // Agregar event listener al botón de logout
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
@@ -133,7 +133,7 @@ async function verificarEstadoPago() {
             document.getElementById('exam-access').classList.remove('hidden');
         }
     } catch (error) {
-        
+
     }
 }
 
@@ -180,9 +180,6 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
         }
     });
 
-    // Pequeño delay para que el loading sea visible
-    await new Promise(resolve => setTimeout(resolve, 500));
-
     // Obtenemos los datos de la cuenta 
     try {
         const res = await fetch(`${API_BASE_URL}/api/usuario/obtenerUsuario`, {
@@ -200,7 +197,7 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
         try {
             data = await res.json();
         } catch (parseErr) {
-            
+
             await Swal.fire({
                 title: 'Error de Respuesta',
                 text: 'El servidor respondió con un formato incorrecto',
@@ -217,7 +214,7 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
 
             // Si ya pagó, mostrar mensaje
             if (pagado === "true") {
-                
+
                 await Swal.fire({
                     title: 'Ya has pagado',
                     text: 'Ya has realizado el pago de este curso anteriormente',
@@ -239,9 +236,6 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
                     text: 'Por favor espera'
                 });
 
-                // Pequeño delay para que el usuario vea el cambio de mensaje
-                await new Promise(resolve => setTimeout(resolve, 800));
-
                 try {
                     const resPago = await fetch(`${API_BASE_URL}/api/usuario/realizarPago`, {
                         method: "POST",
@@ -260,10 +254,10 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
                         document.getElementById('payment-status').classList.add('hidden');
                         document.getElementById('exam-access').classList.remove('hidden');
 
-                        
+
                     } else {
-                        
-                        await new Promise(resolve => setTimeout(resolve, 300));
+
+
 
                         await Swal.fire({
                             title: 'Error al procesar el pago',
@@ -274,8 +268,8 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
                         });
                     }
                 } catch (errorPago) {
-                    
-                    await new Promise(resolve => setTimeout(resolve, 300));
+
+
 
                     await Swal.fire({
                         title: 'Error de Conexión',
@@ -288,8 +282,8 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
             }
 
         } else {
-            
-            await new Promise(resolve => setTimeout(resolve, 300));
+
+
 
             await Swal.fire({
                 title: 'Error',
@@ -301,8 +295,8 @@ document.getElementById('pay-btn').addEventListener('click', async (e) => {
         }
 
     } catch (error) {
-        
-        await new Promise(resolve => setTimeout(resolve, 300));
+
+
 
         await Swal.fire({
             title: 'Error de Conexión',
