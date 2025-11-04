@@ -24,9 +24,7 @@ const startQuiz = (req, res) => {
 
     res.status(200).json({
         message: "Preguntas listas. ¡Éxito!",
-        questions: publicQuestions,
-        // Agregamos el dummy attemptId para que el frontend no falle
-        attemptId: "temp-id-123456"
+        questions: publicQuestions
     });
 };
 
@@ -69,7 +67,7 @@ const submitAnswers = (req, res) => {
     const scorePercent = (total > 0) ? (score / total) * 100 : 0;
     const passed = scorePercent >= 75; // Umbral de aprobación del 75%
 
-    if (passed < 75) {
+    if (!passed) {
         console.log("El usuario ha reprobado el examen");
     }
     else {

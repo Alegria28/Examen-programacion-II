@@ -47,10 +47,10 @@ function updateUILoggedIn(userName) {
         </div>
     </div>
     `;
-    
+
     // Inicializar el dropdown con funcionalidad de click
     initializeDropdown();
-    
+
     // Agregar event listener al botón de logout
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
@@ -100,7 +100,6 @@ const listaPreguntas = document.getElementById("listaPreguntas");
 const resultado = document.getElementById("resultado");
 const submitBtn = document.getElementById("submit-btn");
 
-let currentAttemptId = null;
 let currentQuestions = [];
 
 // --- Función 1: Iniciar el Examen (al cargar la página) ---
@@ -131,8 +130,7 @@ async function loadExam() {
             throw new Error(data.error || "No se pudo cargar el examen.");
         }
 
-        // 3. Guardar datos del intento y renderizar preguntas
-        currentAttemptId = data.attemptId;
+        // 3. Guardar preguntas y renderizarlas
         currentQuestions = data.questions;
         renderQuestions(currentQuestions);
 
@@ -172,7 +170,6 @@ function renderQuestions(questions) {
 // --- Función 4: Enviar el Examen (al hacer submit) ---
 async function submitQuiz(e) {
     if (e) e.preventDefault(); // Prevenir recarga si fue por clic
-    if (!currentAttemptId) return;
 
     submitBtn.disabled = true;
 
@@ -191,7 +188,6 @@ async function submitQuiz(e) {
                 "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
-                attemptId: currentAttemptId,
                 answers: answers
             })
         });
@@ -288,14 +284,14 @@ btnPDF.addEventListener("click", async () => {
 
     try {
         const token = localStorage.getItem('token'); // Obtener el token almacenado
-        
+
         if (!token) {
             alert("No hay token. Inicia sesión primero.");
             return;
         }
         const score = currentScore; // Usar la puntuación almacenada
         if (score >= 6) { // 75% de 8 preguntas = 6
-            
+
             // Mostrar alerta de "Descargando..."
             const downloadAlert = Swal.fire({
                 title: 'Descargando certificado',
@@ -321,7 +317,7 @@ btnPDF.addEventListener("click", async () => {
             });
 
             await downloadAlert.close();
-            
+
             if (response.ok) {
                 const blob = await response.blob();
 
@@ -341,7 +337,7 @@ btnPDF.addEventListener("click", async () => {
                     timer: 3000, // 3 segundos
                     timerProgressBar: true
                 });
-                
+
             } else {
                 // Obtener el mensaje de error del servidor
                 const errorText = await response.text();
@@ -357,5 +353,5 @@ btnPDF.addEventListener("click", async () => {
         console.error("💥 Error message:", error.message);
         alert("Error de conexión: " + error.message);
     }
-    
+
 });
