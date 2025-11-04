@@ -35,10 +35,10 @@ function updateUILoggedIn(userName) {
         </div>
     </div>
     `;
-    
+
     // Inicializar el dropdown con funcionalidad de click
     initializeDropdown();
-    
+
     // Agregar event listener al botón de logout
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
@@ -105,4 +105,61 @@ async function logout() {
     }
 }
 
-checkSession();
+// Código que se ejecutara cuando toda la pagina ya se haya cargado
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                // Hacemos una llamada a nuestra API
+                const res = await fetch(`${API_BASE_URL}/api/form/mandarFormulario`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (res.ok) {
+                    // Simplemente limpiar el formulario sin mostrar alert
+                    contactForm.reset();
+                    
+                    // await Swal.fire({
+                    //     title: '¡Mensaje enviado!',
+                    //     text: 'Tu mensaje ha sido enviado correctamente',
+                    //     icon: 'success',
+                    //     confirmButtonText: 'OK'
+                    // });
+                } else {
+                    // const data = await res.json();
+                    // await Swal.fire({
+                    //     title: 'Error',
+                    //     text: data?.error ?? 'Error al enviar el mensaje',
+                    //     icon: 'error',
+                    //     confirmButtonText: 'OK'
+                    // });
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                
+                // await Swal.fire({
+                //     title: 'Error de conexión',
+                //     text: 'No se pudo conectar con el servidor',
+                //     icon: 'error',
+                //     confirmButtonText: 'OK'
+                // });
+            }
+        });
+    }
+
+    checkSession();
+});

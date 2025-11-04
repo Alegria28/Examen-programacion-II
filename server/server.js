@@ -7,6 +7,7 @@ const authRoutes = require("./routes/auth.routes");
 const questionsRoutes = require("./routes/questions.routes");
 const certificadoRoutes = require("./routes/certificado.routes");
 const userRoutes = require("./routes/user.routes")
+const formRoutes = require("./routes/form.routes")
 const { IP_SERVIDOR } = require("./config");
 
 // Middlewares mínimos
@@ -51,6 +52,7 @@ app.use("/api", authRoutes);
 app.use("/api/questions", questionsRoutes);
 app.use("/api/certificados", certificadoRoutes);
 app.use("/api/usuario", userRoutes);
+app.use("/api/form", formRoutes);
 
 // (Opcional) Ruta de salud
 app.get("/health", (_req, res) => res.json({ ok: true }));
