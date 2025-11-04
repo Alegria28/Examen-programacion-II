@@ -313,6 +313,7 @@ btnPDF.addEventListener("click", async () => {
             alert("No hay token. Inicia sesión primero.");
             return;
         }
+
         const score = currentScore; // Usar la puntuación almacenada
         if (score >= 6) { // 75% de 8 preguntas = 6
 
@@ -340,17 +341,17 @@ btnPDF.addEventListener("click", async () => {
                 }
             });
 
-            await downloadAlert.close();
+            await downloadAlert.close(); // Cerrar la alerta de descarga
 
             if (response.ok) {
-                const blob = await response.blob();
+                const blob = await response.blob(); // Obtener el blob del PDF
 
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `certificado.pdf`;
-                a.click();
-                window.URL.revokeObjectURL(url);
+                const url = window.URL.createObjectURL(blob); // Crear URL temporal
+                const a = document.createElement('a'); // Crear elemento <a>
+                a.href = url; // Asignar URL al href
+                a.download = `certificado.pdf`; // Nombre del archivo
+                a.click(); // Simular clic para descargar
+                window.URL.revokeObjectURL(url); // Liberar memoria
 
                 // Mostrar alerta de éxito con timer de 3 segundos
                 await Swal.fire({

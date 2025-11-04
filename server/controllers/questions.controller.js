@@ -4,8 +4,8 @@ const QUESTIONS = require("../data/questions"); // Banco de 16 preguntas
 const startQuiz = (req, res) => {
 
     // 1. Baraja y toma 8 preguntas
-    const pool = Array.isArray(QUESTIONS) ? QUESTIONS.slice() : [];
-    const shuffled = pool.sort(() => Math.random() - 0.5).slice(0, 8);
+    const pool = Array.isArray(QUESTIONS) ? QUESTIONS.slice() : []; // Copia del banco de preguntas asegurándose que es un array
+    const shuffled = pool.sort(() => Math.random() - 0.5).slice(0, 8); // Barajar y tomar las primeras 8, es decir, toma preguntas aleatorias
 
     // 2. Prepara las 8 preguntas para el frontend (sin respuestas correctas)
     const publicQuestions = [];
@@ -44,7 +44,7 @@ const submitAnswers = (req, res) => {
 
         // 3. Busca la pregunta completa (con la respuesta correcta) 
         // en nuestro banco de preguntas maestro.
-        const q = QUESTIONS.find(q_master => q_master.id === userAnswer.id);
+        const q = QUESTIONS.find(q_master => q_master.id === userAnswer.id); // Busca el objeto completo de la pregunta
 
         // Si el usuario envía un ID que no existe, lo ignoramos
         if (!q) continue;
@@ -64,8 +64,8 @@ const submitAnswers = (req, res) => {
     }
 
     // 6. Determina si aprobó
-    const scorePercent = (total > 0) ? (score / total) * 100 : 0;
-    const passed = scorePercent >= 75; // Umbral de aprobación del 75%
+    const scorePercent = (total > 0) ? (score / total) * 100 : 0; // Porcentaje de aciertos
+    const passed = scorePercent >= 75; // Umbral de aprobación del 75%, mas de 75% sinifica aprobar
 
     if (!passed) {
         console.log("El usuario ha reprobado el examen");
@@ -82,8 +82,6 @@ const submitAnswers = (req, res) => {
         passed,
         details
     });
-
-
 };
 
-module.exports = { startQuiz, submitAnswers };
+module.exports = { startQuiz, submitAnswers }; // Exportar los controladores

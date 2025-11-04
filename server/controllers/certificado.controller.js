@@ -5,8 +5,8 @@ const path = require('path'); // Importar path para rutas seguras
 
 // Helper to move to next line
 function jumpLine(doc, lines) {
-    for (let index = 0; index < lines; index++) {
-        doc.moveDown();
+    for (let index = 0; index < lines; index++) { // Repetir por el número de líneas
+        doc.moveDown(); // Mover hacia abajo una línea
     }
 }
 
@@ -14,11 +14,11 @@ exports.generarPDF = async (req, res) => {
 
     try {
         // 1. Obtener el usuario del request
-        const userId = req.userId;
+        const userId = req.userId; // Obtenido del middleware de autenticación
 
         // 2. Buscar el usuario
         let usuario = users.find(u => {
-            return u.cuenta === userId;
+            return u.cuenta === userId; // Asumiendo que 'cuenta' es el identificador único
         });
 
         // 3. Si no encuentra usuario, crear uno por defecto
@@ -27,8 +27,8 @@ exports.generarPDF = async (req, res) => {
         }
 
         // 4. Configurar la respuesta como PDF
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `attachment; filename="certificado-java-${usuario.cuenta}.pdf"`);
+        res.setHeader('Content-Type', 'application/pdf'); // Tipo de contenido PDF
+        res.setHeader('Content-Disposition', `attachment; filename="certificado-java-${usuario.cuenta}.pdf"`); // Forzar descarga con nombre de archivo
 
         // 5. Crear el PDF
         const doc = new PDFDocument({
@@ -37,26 +37,25 @@ exports.generarPDF = async (req, res) => {
         });
 
         // Pipe ANTES de cualquier contenido
-        doc.pipe(res);
+        doc.pipe(res); // Enviar el PDF directamente en la respuesta
 
         // 6. Contenido del PDF con manejo de errores en imágenes
-
-        doc.rect(0, 0, doc.page.width, doc.page.height).fill('#fff');
+        doc.rect(0, 0, doc.page.width, doc.page.height).fill('#fff'); // Fondo blanco
 
         doc.fontSize(10);
 
         // Margin
-        const distanceMargin = 18;
+        const distanceMargin = 18; // Margen desde los bordes
 
         doc
             .fillAndStroke('#0e8cc3')
             .lineWidth(20)
-            .lineJoin('round')
-            .rect(
-                distanceMargin,
-                distanceMargin,
-                doc.page.width - distanceMargin * 2,
-                doc.page.height - distanceMargin * 2,
+            .lineJoin('round') // Esquinas redondeadas
+            .rect( // Dibuja un rectángulo con margen
+                distanceMargin, // x
+                distanceMargin, // y
+                doc.page.width - distanceMargin * 2, // width
+                doc.page.height - distanceMargin * 2, // height
             )
             .stroke();
 
@@ -65,10 +64,10 @@ exports.generarPDF = async (req, res) => {
         const maxHeight = 70;
 
         try {
-            const logoPath = path.join(__dirname, '../img/Logo.png');
-            if (fs.existsSync(logoPath)) {
-                doc.image(logoPath, doc.page.width / 2 - maxWidth / 2, 60, {
-                    fit: [maxWidth, maxHeight],
+            const logoPath = path.join(__dirname, '../img/Logo.png'); // Ruta segura para el logo
+            if (fs.existsSync(logoPath)) { // Verificar si el archivo existe
+                doc.image(logoPath, doc.page.width / 2 - maxWidth / 2, 60, { // Centrar el logo en el header
+                    fit: [maxWidth, maxHeight], // Ajustar tamaño máximo
                     align: 'center',
                 });
             }
@@ -91,7 +90,7 @@ exports.generarPDF = async (req, res) => {
         doc
             .fontSize(16)
             .fill('#021c27')
-            .text('CERTIFICATE OF COMPLETION', {
+            .text('CERTIFICATE OF COMPLETION', { // Título del certificado
                 align: 'center',
             });
 
@@ -138,23 +137,23 @@ exports.generarPDF = async (req, res) => {
         doc.lineWidth(1);
 
         // Signatures - LADO IZQUIERDO (Instructor)
-        const lineSize = 174;
-        const signatureHeight = 390;
+        const lineSize = 174; // Ancho de la línea de firma
+        const signatureHeight = 390; // Altura donde van las firmas
 
-        doc.fillAndStroke('#021c27');
-        doc.strokeOpacity(0.2);
+        doc.fillAndStroke('#021c27'); // Color de las líneas de firma
+        doc.strokeOpacity(0.2); // Opacidad de las líneas de firma
 
         // Firma izquierda - Instructor
-        const leftStartX = 100;
-        const leftEndX = leftStartX + lineSize;
+        const leftStartX = 100; // Punto inicial de la línea izquierda
+        const leftEndX = leftStartX + lineSize; // Punto final de la línea izquierda
 
         // Imagen firma instructor (lado izquierdo)
         try {
-            const firmaInstructorPath = path.join(__dirname, '../img/firmaInstructor.png');
-            if (fs.existsSync(firmaInstructorPath)) {
-                doc.image(firmaInstructorPath, leftStartX + (lineSize / 2) - 30, signatureHeight - 30, {
-                    width: 60,
-                    align: 'center',
+            const firmaInstructorPath = path.join(__dirname, '../img/firmaInstructor.png'); // Ruta segura para la firma, 
+            if (fs.existsSync(firmaInstructorPath)) { // Verificar si el archivo existe
+                doc.image(firmaInstructorPath, leftStartX + (lineSize / 2) - 30, signatureHeight - 30, { // Centrar la imagen sobre la línea
+                    width: 60, // Ancho de la imagen
+                    align: 'center', // Alineación centrada
                 });
             }
         } catch (error) {
@@ -165,42 +164,42 @@ exports.generarPDF = async (req, res) => {
 
         // Línea firma instructor
         doc
-            .moveTo(leftStartX, signatureHeight)
-            .lineTo(leftEndX, signatureHeight)
-            .stroke();
+            .moveTo(leftStartX, signatureHeight) // Punto inicial
+            .lineTo(leftEndX, signatureHeight) // Punto final
+            .stroke(); // Dibujar la línea
 
         // Texto firma instructor
         doc
-            .fontSize(10)
+            .fontSize(10) 
             .fill('#021c27')
-            .text('Eduardo Arturo Alegria Vela', leftStartX, signatureHeight + 10, {
-                columns: 1,
-                columnGap: 0,
-                height: 40,
-                width: lineSize,
-                align: 'center',
+            .text('Eduardo Arturo Alegria Vela', leftStartX, signatureHeight + 10, { // Nombre del instructor
+                columns: 1, // Una columna
+                columnGap: 0,  // Sin espacio entre columnas
+                height: 40, // Altura del texto
+                width: lineSize, // Ancho igual a la línea de firma
+                align: 'center', // Alineación centrada
             });
 
         doc
             .fontSize(10)
             .fill('#021c27')
-            .text('Technical Instructor', leftStartX, signatureHeight + 25, {
-                columns: 1,
-                columnGap: 0,
-                height: 40,
-                width: lineSize,
+            .text('Technical Instructor', leftStartX, signatureHeight + 25, { // Título del instructor
+                columns: 1, // Una columna
+                columnGap: 0, // Sin espacio entre columnas
+                height: 40, // Altura del texto
+                width: lineSize, // Ancho igual a la línea de firma
                 align: 'center',
             });
 
         // Firma derecha - CEO
-        const rightStartX = doc.page.width - 100 - lineSize;
-        const rightEndX = rightStartX + lineSize;
+        const rightStartX = doc.page.width - 100 - lineSize; // Punto inicial de la línea derecha
+        const rightEndX = rightStartX + lineSize; // Punto final de la línea derecha
 
         // Imagen firma CEO (lado derecho)
         try {
-            const firmaCEOPath = path.join(__dirname, '../img/firmaCEO.png');
+            const firmaCEOPath = path.join(__dirname, '../img/firmaCEO.png'); // Ruta segura para la firma CEO
             if (fs.existsSync(firmaCEOPath)) {
-                doc.image(firmaCEOPath, rightStartX + (lineSize / 2) - 30, signatureHeight - 30, {
+                doc.image(firmaCEOPath, rightStartX + (lineSize / 2) - 30, signatureHeight - 30, { // Centrar la imagen sobre la línea
                     width: 60,
                     align: 'center',
                 });
@@ -213,26 +212,26 @@ exports.generarPDF = async (req, res) => {
 
         // Línea firma CEO
         doc
-            .moveTo(rightStartX, signatureHeight)
-            .lineTo(rightEndX, signatureHeight)
-            .stroke();
+            .moveTo(rightStartX, signatureHeight) // Punto inicial
+            .lineTo(rightEndX, signatureHeight) // Punto final
+            .stroke(); // Dibujar la línea
 
         // Texto firma CEO
         doc
             .fontSize(10)
             .fill('#021c27')
-            .text('Darely Quezada Guerrero', rightStartX, signatureHeight + 10, {
-                columns: 1,
-                columnGap: 0,
-                height: 40,
-                width: lineSize,
+            .text('Darely Quezada Guerrero', rightStartX, signatureHeight + 10, { // Nombre del CEO
+                columns: 1, // Una columna
+                columnGap: 0, // Sin espacio entre columnas
+                height: 40, // Altura del texto
+                width: lineSize, // Ancho igual a la línea de firma
                 align: 'center',
             });
 
         doc
             .fontSize(10)
             .fill('#021c27')
-            .text('CEO of LexisCode', rightStartX, signatureHeight + 25, {
+            .text('CEO of LexisCode', rightStartX, signatureHeight + 25, { // Título del CEO
                 columns: 1,
                 columnGap: 0,
                 height: 40,
