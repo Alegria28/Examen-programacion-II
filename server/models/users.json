@@ -4,7 +4,7 @@
     "cuenta": "alegria",
     "contrasena": "alegriaProgra",
     "nombre": "Eduardo Arturo Alegria Vela ",
-    "cursoPagado": "true",
+    "cursoPagado": "false",
     "cursoRealizado": "false"
   },
   {
@@ -12,7 +12,7 @@
     "cuenta": "darely",
     "contrasena": "darelyProgra",
     "nombre": "Darely Quezada Guerrero",
-    "cursoPagado": "true",
+    "cursoPagado": "false",
     "cursoRealizado": "false"
   },
   {
@@ -20,7 +20,7 @@
     "cuenta": "oscar",
     "contrasena": "oscarProgra",
     "nombre": "Oscar de Jesús Guillén Ibarra",
-    "cursoPagado": "true",
+    "cursoPagado": "false",
     "cursoRealizado": "false"
   },
   {
