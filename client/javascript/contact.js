@@ -108,7 +108,7 @@ async function logout() {
 // Código que se ejecutara cuando toda la pagina ya se haya cargado
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contactForm');
-    
+
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -132,31 +132,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (res.ok) {
                     // Simplemente limpiar el formulario sin mostrar alert
                     contactForm.reset();
-                    
-                    // await Swal.fire({
-                    //     title: '¡Mensaje enviado!',
-                    //     text: 'Tu mensaje ha sido enviado correctamente',
-                    //     icon: 'success',
-                    //     confirmButtonText: 'OK'
-                    // });
+
+                    await Swal.fire({
+                        title: '¡Mensaje enviado!',
+                        text: 'Tu mensaje ha sido enviado correctamente',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
                 } else {
-                    // const data = await res.json();
-                    // await Swal.fire({
-                    //     title: 'Error',
-                    //     text: data?.error ?? 'Error al enviar el mensaje',
-                    //     icon: 'error',
-                    //     confirmButtonText: 'OK'
-                    // });
+                    const data = await res.json();
+                    await Swal.fire({
+                        title: 'Error',
+                        text: data?.error ?? 'Error al enviar el mensaje',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
                 }
             } catch (err) {
                 console.error('Error:', err);
-                
-                // await Swal.fire({
-                //     title: 'Error de conexión',
-                //     text: 'No se pudo conectar con el servidor',
-                //     icon: 'error',
-                //     confirmButtonText: 'OK'
-                // });
+
+                await Swal.fire({
+                    title: 'Error de conexión',
+                    text: 'No se pudo conectar con el servidor',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
             }
         });
     }
