@@ -68,8 +68,10 @@ const submitAnswers = (req, res) => {
     // 6. Determina si aprobó
     const scorePercent = (total > 0) ? (score / total) * 100 : 0;
     const passed = scorePercent >= 75; // Umbral de aprobación del 75%
-
-    // 7. Envía el resultado
+    
+    if(passed<75) console.log("REPROBADO");
+    
+        // 7. Envía el resultado
     return res.status(200).json({
         message: "Respuestas evaluadas.",
         score,
@@ -77,6 +79,8 @@ const submitAnswers = (req, res) => {
         passed,
         details
     });
+
+    
 };
 
 module.exports = { startQuiz, submitAnswers };
