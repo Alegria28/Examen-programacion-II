@@ -3,42 +3,42 @@
     "id": "1",
     "cuenta": "alegria",
     "contrasena": "alegriaProgra",
-    "nombre": "Alegria Vela",
+    "nombre": "Eduardo Arturo Alegria Vela ",
     "cursoPagado": "true"
   },
   {
     "id": "2",
     "cuenta": "darely",
     "contrasena": "darelyProgra",
-    "nombre": "Darely Quezada",
-    "cursoPagado": "false"
+    "nombre": "Darely Quezada Guerrero",
+    "cursoPagado": "true"
   },
   {
     "id": "3",
     "cuenta": "oscar",
     "contrasena": "oscarProgra",
-    "nombre": "Oscar Guillen",
+    "nombre": "Oscar de Jesús Guillén Ibarra",
     "cursoPagado": "false"
   },
   {
     "id": "4",
     "cuenta": "luis",
     "contrasena": "progra1",
-    "nombre": "Luis Vela",
+    "nombre": "Luis Vela Gutiérrez",
     "cursoPagado": "false"
   },
   {
     "id": "5",
     "cuenta": "andrea",
     "contrasena": "progra2",
-    "nombre": "Andrea Lopez",
+    "nombre": "Andrea Lopez Martinez",
     "cursoPagado": "false"
   },
   {
     "id": "6",
     "cuenta": "prof_uaa",
     "contrasena": "progra3",
-    "nombre": "Guillermo Lopez",
+    "nombre": "Guillermo Lopez Pérez",
     "cursoPagado": "false"
   }
 ]
