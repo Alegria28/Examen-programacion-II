@@ -81,8 +81,32 @@ async function logout() {
                 "Authorization": `Bearer ${localStorage.getItem('token')}`
             }
         });
+
+        if (res.ok) {
+            await Swal.fire({
+                title: '¡Sesión cerrada!',
+                text: 'Has cerrado sesión correctamente',
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        } else {
+            const data = await res.json();
+            await Swal.fire({
+                title: 'Error',
+                text: data?.error ?? 'Error al cerrar sesión',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
     } catch (err) {
         console.error("Error al conectar con el servidor:", err);
+        await Swal.fire({
+            title: 'Error de conexión',
+            text: 'No se pudo conectar con el servidor',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     } finally {
         localStorage.removeItem('token');
         localStorage.removeItem('userName');
