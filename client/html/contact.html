@@ -33,23 +33,67 @@
 
     <main>
         <section class="contact-hero">
-            <div class="contact-card">
-                <h1>Contáctanos</h1>
-                <p>Déjanos tu nombre, correo y tu duda o mensaje. Te responderemos pronto.</p>
+            <div class="contact-wrapper">
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <h1>Contáctanos</h1>
+                    <p>¿Tienes alguna pregunta sobre nuestras certificaciones o necesitas más información? Estamos aquí
+                        para ayudarte. Déjanos tu mensaje y nos pondremos en contacto contigo lo antes posible.</p>
 
-                <form id="contactForm">
-                    <label for="name">Nombre</label>
-                    <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-text">
+                                <h3>Email</h3>
+                                <p>info@lexiscode.com</p>
+                            </div>
+                        </div>
 
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-text">
+                                <h3>Redes Sociales</h3>
+                                <p>@lexiscode_academy</p>
+                            </div>
+                        </div>
 
-                    <label for="message">Mensaje / Pregunta</label>
-                    <textarea id="message" name="message" rows="6" placeholder="Escribe tu pregunta aquí..."
-                        required></textarea>
+                        <div class="contact-item">
+                            <div class="contact-icon">⏰</div>
+                            <div class="contact-text">
+                                <h3>Horario</h3>
+                                <p>Lun - Vie: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    <button type="submit" class="btn-send">Enviar mensaje</button>
-                </form>
+                <!-- Formulario de contacto -->
+                <div class="contact-card">
+                    <div class="form-header">
+                        <h2>Envíanos un mensaje</h2>
+                        <p>Completa el formulario y te responderemos pronto.</p>
+                    </div>
+
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Mensaje / Pregunta</label>
+                            <textarea id="message" name="message" rows="6"
+                                placeholder="Escribe tu pregunta o comentario aquí..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-send">Enviar mensaje</button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
