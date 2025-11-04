@@ -637,3 +637,22 @@ footer {
 .social-media a:hover {
     color: #a855f7;
 }
+
+#btnPDF {
+    display: inline-block;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #8a2be2, #6b22b8);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(138, 43, 226, 0.4);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
