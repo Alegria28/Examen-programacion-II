@@ -60,7 +60,13 @@ header {
     padding: 20px 50px;
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid #2a2a4a;
+    border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 nav {
@@ -79,11 +85,17 @@ nav {
     font-size: 1.2em;
     color: #ffffff;
     text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .logo img {
     height: 55px;
     object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(138, 43, 226, 0.3));
 }
 
 nav ul {
@@ -99,13 +111,32 @@ nav a {
     text-decoration: none;
     color: #ffffff;
     cursor: pointer;
-    padding: 8px 15px;
-    border-radius: 20px;
-    transition: background-color 0.3s;
+    padding: 10px 18px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 70%;
+    height: 2px;
+    background: linear-gradient(90deg, #8a2be2, #a855f7);
+    transition: transform 0.3s ease;
+}
+
+nav a:hover::before {
+    transform: translateX(-50%) scaleX(1);
 }
 
 nav a:hover {
-    background-color: #8a2be2;
+    background-color: rgba(138, 43, 226, 0.2);
+    color: #ffffff;
 }
 
 .section-title {
