@@ -582,7 +582,6 @@ nav a:hover {
 }
 
 .ok::before {
-    content: '✓';
     font-size: 1.2em;
 }
 
@@ -596,7 +595,6 @@ nav a:hover {
 }
 
 .bad::before {
-    content: '✗';
     font-size: 1.2em;
 }
 
