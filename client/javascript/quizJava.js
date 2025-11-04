@@ -4,6 +4,8 @@ import { initializeDropdown } from './dropdownHandler.js';
 const API_CERTIFICADO = `${API_BASE_URL}/api/certificados`; // Ruta para certificados
 const btnPDF = document.getElementById("btnPDF"); // Botón para descargar PDF
 
+let currentScore = null; // Variable para almacenar la puntuación actual
+
 // --- Función para verificar si hay sesión activa ---
 function checkSession() {
     const userName = localStorage.getItem('userName');
@@ -103,6 +105,9 @@ let currentQuestions = [];
 
 // --- Función 1: Iniciar el Examen (al cargar la página) ---
 async function loadExam() {
+    // Ocultar inmediatamente
+    btnPDF.style.display = 'none';
+
     const token = localStorage.getItem('token');
 
     // 1. Mostrar datos de la cabecera del examen
@@ -133,7 +138,6 @@ async function loadExam() {
 
         // 4. Mostrar formulario
         quizForm.style.display = "block";
-        // SE HA ELIMINADO LA LLAMADA A startTimer()
 
     } catch (err) {
         await Swal.fire({
@@ -215,6 +219,8 @@ function renderResult(data) {
     // Ocultar el formulario
     quizForm.style.display = "none";
 
+    currentScore = data.score; // Guardar la puntuación actual
+
     const resultTitle = data.passed
         ? "¡Felicidades, has APROBADO!"
         : "Resultado: NO APROBADO";
@@ -241,6 +247,7 @@ function renderResult(data) {
     // data.passed = true; // Simulación para pruebas
     if (data.passed === true) {
         btnPDF.hidden = false;
+        btnPDF.style.display = 'inline-block';
     }
 }
 
@@ -254,68 +261,91 @@ if (localStorage.getItem('userName')) {
 
 // Funcionalidad de descarga de certificado en PDF
 btnPDF.addEventListener("click", async () => {
-    if (confirm("¿Deseas descargar tu certificado en PDF?")) {
-        try {
-            const token = localStorage.getItem('token'); // Obtener el token almacenado
-            // Verificación solo en frontend
-            //const score = parseInt(document.querySelector('h2').textContent.split('/')[0].split(':')[1].trim());
-            if (!token) {
-                alert("No hay token. Inicia sesión primero.");
-                return;
-            }
-            const score = 8;
+    const confirmResult = await Swal.fire({
+        title: '¿Descargar certificado?',
+        text: '¿Deseas descargar tu certificado en PDF?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, descargar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33'
+    });
 
-            if (score >= 6) { // 75% de 8 preguntas = 6
-                alert("¡Felicidades! Has aprobado el examen. Descargando certificado...");
-
-                alert("¡Descargando certificado...");
-
-                // URL completa
-                const urlCompleta = `${API_CERTIFICADO}/certificado`;
-
-                // Llamar al backend para generar y descargar el certificado (sin body)
-                const response = await fetch(urlCompleta, {
-                    method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                });
-                /*
-                if (response.ok) {
-                    const blob = await response.blob(); // Obtener el PDF como blob
-                    const url = window.URL.createObjectURL(blob); // Crear una URL para el blob
-                    const a = document.createElement('a'); // Crear un enlace temporal
-                    a.href = url; // Asignar la URL del blob
-                    a.download = `certificado.pdf`; // Nombre fijo
-                    a.click(); // Simular clic para descargar
-                    window.URL.revokeObjectURL(url); // Liberar la URL del blob
-                } else {
-                    const errorData = await response.json();
-                    alert(`Error: ${errorData.error}`);
-                }*/
-                if (response.ok) {
-                    const blob = await response.blob();
-
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `certificado.pdf`;
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                } else {
-                    // Obtener el mensaje de error del servidor
-                    const errorText = await response.text();
-                    alert(`Error del servidor (${response.status}): ${errorText}`);
-                }
-
-            } else {
-                alert("No has alcanzado la puntuación mínima para obtener el certificado.");
-            }
-        } catch (error) {
-            console.error("💥 Error completo:", error);
-            console.error("💥 Error name:", error.name);
-            console.error("💥 Error message:", error.message);
-            alert("Error de conexión: " + error.message);
-        }
+    if (!confirmResult.isConfirmed) {
+        return; // El usuario canceló
     }
+
+    try {
+        const token = localStorage.getItem('token'); // Obtener el token almacenado
+        
+        if (!token) {
+            alert("No hay token. Inicia sesión primero.");
+            return;
+        }
+        const score = currentScore; // Usar la puntuación almacenada
+        if (score >= 6) { // 75% de 8 preguntas = 6
+            
+            // Mostrar alerta de "Descargando..."
+            const downloadAlert = Swal.fire({
+                title: 'Descargando certificado',
+                text: 'Por favor espera...',
+                icon: 'info',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                    Swal.close(); // Cerrar la alerta inmediatamente
+                }
+            });
+
+            // URL completa
+            const urlCompleta = `${API_CERTIFICADO}/certificado`;
+
+            // Llamar al backend para generar y descargar el certificado (sin body)
+            const response = await fetch(urlCompleta, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            await downloadAlert.close();
+            
+            if (response.ok) {
+                const blob = await response.blob();
+
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `certificado.pdf`;
+                a.click();
+                window.URL.revokeObjectURL(url);
+
+                // Mostrar alerta de éxito con timer de 3 segundos
+                await Swal.fire({
+                    title: '¡Descarga completada!',
+                    text: 'Tu certificado se ha descargado correctamente.',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000, // 3 segundos
+                    timerProgressBar: true
+                });
+                
+            } else {
+                // Obtener el mensaje de error del servidor
+                const errorText = await response.text();
+                alert(`Error del servidor (${response.status}): ${errorText}`);
+            }
+
+        } else {
+            alert("No has alcanzado la puntuación mínima para obtener el certificado.");
+        }
+    } catch (error) {
+        console.error("💥 Error completo:", error);
+        console.error("💥 Error name:", error.name);
+        console.error("💥 Error message:", error.message);
+        alert("Error de conexión: " + error.message);
+    }
+    
 });

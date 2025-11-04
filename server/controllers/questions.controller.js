@@ -67,7 +67,7 @@ const submitAnswers = (req, res) => {
 
     // 6. Determina si aprobó
     const scorePercent = (total > 0) ? (score / total) * 100 : 0;
-    const passed = scorePercent >= 80;
+    const passed = scorePercent >= 75; // Umbral de aprobación del 75%
 
     // 7. Envía el resultado
     return res.status(200).json({
